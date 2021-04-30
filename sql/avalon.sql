@@ -199,9 +199,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `id_tipo`, `id_estado`, `id_disponibilidad`, `alias`, `email`, `pwd`, `create_date`, `last_connection`, `id_tipo_documento`, `num_documento`, `name`, `surname_01`, `surname_02`, `birth_date`, `id_titulacion`, `sector_estudios`) VALUES
-(49, 2, 1, '0110', 'voluntario', 'volu@volu.com', '$2y$10$XHsT70uvsvtUrXnEeMwcxuKNEV1rl4If9nEhFBnb.TfkD3fe7pSpW', '2021-04-29', '2021-04-29', 1, '111111111111', 'voluntario', 'voluntario', '', '2000-11-11', 1, 1),
-(52, 3, 1, '0000', 'lunes', 'lune@f.es', '$2y$10$a4rvdyYY4kYAlknN3KrSBOTwsqsETwbwKXB98UgHt0b/YTfD0q6Ci', '2021-04-29', '2021-04-29', 1, '121212', 'Hola/2020', 'Hola/2020', '', '2000-11-11', 1, 1),
-(55, 1, 1, '0000', 'martes', 'M@M.ES', '$2y$10$rrub1bTcTubTXEDtKHVoTOYi.RH765IGEv2fymzXTrhNJ0x7BPnfW', '2021-04-29', '2021-04-29', 1, 'dfsdfasd', 'Hola/2020', 'Hola/2020', 'Hola/2020', '2000-11-11', 1, 1);
+(49, 2, 1, '0110', 'lunes', 'volu@volu.com', '$2y$10$XHsT70uvsvtUrXnEeMwcxuKNEV1rl4If9nEhFBnb.TfkD3fe7pSpW', '2021-04-29', '2021-04-29', 1, '111111111111', 'voluntario', 'voluntario', '', '2000-11-11', 1, 1),
+(52, 3, 1, '0000', 'martes', 'lune@f.es', '$2y$10$a4rvdyYY4kYAlknN3KrSBOTwsqsETwbwKXB98UgHt0b/YTfD0q6Ci', '2021-04-29', '2021-04-29', 1, '121212', 'Hola/2020', 'Hola/2020', '', '2000-11-11', 1, 1),
+(55, 1, 1, '0000', 'admin', 'M@M.ES', '$2y$10$rrub1bTcTubTXEDtKHVoTOYi.RH765IGEv2fymzXTrhNJ0x7BPnfW', '2021-04-29', '2021-04-29', 1, 'dfsdfasd', 'Hola/2020', 'Hola/2020', 'Hola/2020', '2000-11-11', 1, 1);
 
 --
 -- Índices para tablas volcadas
