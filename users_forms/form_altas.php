@@ -8,7 +8,7 @@
 
 	if(isset($_SESSION['alias_user'])){
 		header("Location: ../vistas/perfil_usuario.php");
-  echo "no sesion";
+     echo "no sesion";
 	}
 
 ?>

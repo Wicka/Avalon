@@ -42,18 +42,48 @@
         $_items="";
 
           foreach ($_actividades as $Key => $value){
-              $_items=$_items.
-              "<div class='div_actividades'>"
 
-                .$value['direccion']."<br>"
-                .$value['fecha_inicio']."<hr>
-                 Participantes : ".$value['num_participante']."<hr>"
-                .$value['descripcion']."<br><hr><hr>
-                <a href='../activities_forms/form_editar.php?id=$value[id]'> Editar </a>
-      
+              if ($_SESSION['tipo_user']==2){//VOLUNCTARIO
+                            
 
+                        if($value['id_voluntario']!=$_SESSION['id_user']){
 
-              </div>";
+                          $_items=$_items.
+                          "<div class='div_actividades_otros'>"                
+                          .$value['name']."<hr>"
+                          .$value['direccion']."<br>"
+                          .$value['fecha_inicio']."<hr>
+                          Participantes : ".$value['num_participante']."<hr>"
+                          .$value['descripcion']."<br><hr>
+                          Voluntario id : ".$value['id_voluntario']."<hr>              
+                          </div>";
+
+                      }else{
+
+                          $_items=$_items.
+                          "<div class='div_actividades_propias'>"
+                            .$value['name']."<hr>"
+                            .$value['direccion']."<br>"
+                            .$value['fecha_inicio']."<hr>
+                            Participantes : ".$value['num_participante']."<hr>"
+                            .$value['descripcion']."<br><hr>
+                            Voluntario id : ".$value['id_voluntario']."<hr>
+                            <a href='../activities_forms/form_editar.php?id=$value[id]'> Editar </a>
+                            </div>";
+                      }
+              }else{  //USUARIO
+
+                $_items=$_items.
+                "<div class='div_actividades_usuario'>"
+                  .$value['name']."<hr>"
+                  .$value['direccion']."<br>"
+                  .$value['fecha_inicio']."<hr>
+                  Participantes : ".$value['num_participante']."<hr>"
+                  .$value['descripcion']."<br><hr>                 
+                  <a href='../actividades/apuntarse.php?id=$value[id]'> Apuntarse </a>
+                  </div>";
+
+              }
           }
 
 

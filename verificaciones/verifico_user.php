@@ -1,7 +1,7 @@
 <?php
      
       include ("../sesiones/sesiones.php");   
-      include ("../classes/usuario.php");
+      include ("../classes/Usuario.php");
 
       //include ("../verificaciones/funciones_seguridad.php");
 

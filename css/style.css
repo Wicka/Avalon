@@ -160,6 +160,9 @@ color:white;
   background-color: teal;
 }
 
+.body_error{
+  background:firebrick;
+}
 
 body{
  
@@ -170,7 +173,11 @@ body{
 }
 
 
-
+#error{
+  text-align: center;
+  padding: 2px;;
+  
+}
 
 
 
@@ -212,9 +219,30 @@ section, div{
   flex-wrap: wrap;
 }
 
-.div_actividades{
+.div_actividades_propias{
+  border: 1px solid black;
+ 
+  background-color: rgb(170, 123, 114);
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 220px;
+  font-size: 15pt;
+}
+
+.div_actividades_otros{
   border: 1px solid black;
   background-color: tomato;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  width: 220px;
+  font-size: 15pt;
+}
+
+.div_actividades_usuario{
+  border: 1px solid black;
+  background-color: rgb(60, 170, 65);
   padding: 10px;
   margin: 10px;
   text-align: center;

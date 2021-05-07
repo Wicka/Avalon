@@ -123,7 +123,7 @@
                           echo "
                                 <nav>
                                   <ul>
-                                      <li>Ver Actividades de tu interes</li>
+                                      <li><a href='../actividades/actividades_bcn.php'>Actividades</a></li>
                                       <li>Ver Actividades en tu franja horaria</li>
                                       <li>Ver todas las Actividades</li>
                                       <li>Ver Propuestas</li>

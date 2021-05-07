@@ -61,6 +61,70 @@
  }
 
 
+
+
+ //////////////////////ACTIVIDADES ///////////////////////////////
+
+
+
+      function get_all_ambitos(){
+
+        $conn  = Connect_BBDD();
+        $_ambitos=[];
+
+        $Query = "SELECT * FROM `aux_ambito`" ;
+
+        $ambitos = $conn->query($Query);
+
+        if($ambitos->num_rows > 0){
+
+            while($fila = $ambitos->fetch_assoc()) {
+
+                array_push($_ambitos,$fila) ;
+            }
+
+        }else{
+          echo "<br>No Existe este usuario";
+          $_ambitos=-1;
+        }
+
+        $conn->close();
+        return $_ambitos;
+
+      }
+
+
+      
+
+      function get_all_poblacion(){
+
+        $conn  = Connect_BBDD();
+        $_poblacion=[];
+
+        $Query = "SELECT * FROM `aux_poblacion`" ;
+
+        $poblacion = $conn->query($Query);
+
+        if($poblacion->num_rows > 0){
+
+            while($fila = $poblacion->fetch_assoc()) {
+
+                array_push($_poblacion,$fila) ;
+            }
+
+        }else{
+          echo "<br>No Existe este usuario";
+          $_poblacion=-1;
+        }
+
+        $conn->close();
+        return $_poblacion;
+
+      }
+
+
+
+
 //**********************************************************************/
 //**********************************************************************/
 //****************** ETIQUESTAS HTML RELLENAS***************************/

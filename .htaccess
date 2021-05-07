@@ -1,0 +1,21 @@
+#error 401
+#Unauthorized
+ErrorDocument 401 http://localhost/Avalon/errores/401.php
+
+
+#error 403
+#Forbidden
+ErrorDocument 403 http://localhost/Avalon/errores/403.php
+
+#error 404
+#Not Found
+ErrorDocument 404 http://localhost/Avalon/errores/404.php
+
+
+#error 500
+#Internal Server Error
+ErrorDocument 500 http://localhost/Avalon/errores/500.php
+
+DirectoryIndex index.php
+
+Options -Indexes

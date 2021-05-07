@@ -1,65 +1,59 @@
 <?php
+    session_start();
+
     include ("../sesiones/sesiones.php");
     include ("../classes/Actividad.php");
+  
 
   //  include ("../verificaciones/funciones_seguridad.php");
+    
 
-
+    if(isset($_SESSION['alias_user'])){
+        //     header("Location: ../vistas/perfil_usuario.php");
+            echo "no sesion";
+          
+        }else{
+            echo "sesion alias : ".$_SESSION['alias_user'];
+        }
 
     if($_POST!=null){
 
-        if($_POST['tipo_usuario']!=null and $_POST['alias']!=null and $_POST['pwd']!=null and $_POST['name']!=null and $_POST['surname_1']!=null and $_POST['birth']!=null and $_POST['email']!=null){
-
-               if (!empty($_POST['manana'])) {                   
-                        $_manana='1';
-                    } else {                   
-                        $_manana='0';
-                    }                  
-
-                if (!empty($_POST['mediodia'])){                    
-                        $_mediodia='1';
-                    }else{                    
-                        $_mediodia='0';
-                    }
-                  
-                if (!empty($_POST['tarde'])) {                     
-                        $_tarde='1';
-                    } else {                   
-                        $_tarde='0';
-                    }
-               
-                if (!empty($_POST['noche'])) {                 
-                        $_noche='1';
-                    } else {                     
-                        $_noche='0';
-                    }                  
-
-                $_disponibilidad    =   $_manana.$_mediodia.$_tarde.$_noche;
+        if($_POST['nombre_actividad']!=null and $_POST['descripcion_actividad']!=null and $_POST['direccion']!=null and $_POST['fecha_inicio']!=null and $_POST['fecha_fin']!=null and $_POST['duracion']!=null  and $_POST['num_participantes']!=null){
 
 
                     $_actividad = new Actividad("");
        
                 
-                    $_actividad->descripcion            =   $_POST['tipo_usuario'];        
-                    $_actividad->direccion          =   "";
-                    $_actividad->duracion                =   $_disponibilidad;
+                    $_actividad->name                   =   filter_var(trim($_POST['nombre_actividad']), FILTER_SANITIZE_STRING);   
+                    $_actividad->descripcion            =   filter_var(trim($_POST['descripcion_actividad']), FILTER_SANITIZE_STRING); 
+                    $_actividad->direccion              =   filter_var(trim($_POST['direccion']), FILTER_SANITIZE_STRING); 
+
+                    $_actividad->fecha_inicio           =   filter_var(trim($_POST['fecha_inicio']), FILTER_SANITIZE_NUMBER_INT);
+                    $_actividad->fecha_fin              =   filter_var(trim($_POST['fecha_fin']), FILTER_SANITIZE_NUMBER_INT);
+
+                    $_actividad->duracion               =   filter_var(trim($_POST['duracion']), FILTER_SANITIZE_NUMBER_INT);
                  
-                    $_actividad->fecha_inicio               =   filter_var(strtolower(trim($_POST['alias'])), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
-                    $_actividad->fecha_fin               =   filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
-                    $_actividad->hora_inicio                 =   filter_var($_POST["pwd"], FILTER_SANITIZE_STRING);               
-                    $_actividad->hora_fin            =   filter_var(trim($_POST['documento']), FILTER_SANITIZE_NUMBER_INT);
+                    $_actividad->ambito                 =   filter_var(trim($_POST['ambito']), FILTER_SANITIZE_NUMBER_INT);                 
+                    $_actividad->poblacion              =   filter_var(trim($_POST['poblacion']), FILTER_SANITIZE_NUMBER_INT);
 
+                    $_actividad->num_participante       =  filter_var(trim($_POST['num_participantes']), FILTER_SANITIZE_NUMBER_INT);  
 
-                    $_actividad->habilitada       =   filter_var(trim($_POST['num_doc']), FILTER_SANITIZE_STRING);       
-                    
-                    $_actividad->ambito                =   filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-                    $_actividad->grupo          =   filter_var($_POST['surname_1'], FILTER_SANITIZE_STRING);
-                    $_actividad->pobalcion          =   filter_var($_POST['surname_2'], FILTER_SANITIZE_STRING);
+                    if (!empty($_POST['adaptada'])) {                   
+                        $_adaptada='1';
+                    } else {                   
+                        $_adaptada='0';
+                    }     
+
+                    $_actividad->adaptada               =  filter_var(trim($_adaptada), FILTER_SANITIZE_NUMBER_INT);  
                 
-                    $_actividad->voluntario          =   filter_var(trim($_POST['birth']), FILTER_SANITIZE_NUMBER_INT);
-                    
-                    $_actividad->name       =   filter_var(trim($_POST['nivel_estudio']), FILTER_SANITIZE_NUMBER_INT);                      
-                    $_actividad->num_participante     =  filter_var(trim($_POST['sector_estudio']), FILTER_SANITIZE_STRING);
+
+                    //$_actividad->hora_inicio            =    filter_var(trim($_POST['duracion']), FILTER_SANITIZE_NUMBER_INT);                    
+                   // $_actividad->hora_fin                 =    filter_var(trim($_POST['duracion']), FILTER_SANITIZE_NUMBER_INT);
+    
+                    $_actividad->voluntario          =   filter_var(trim($_POST['id_user']), FILTER_SANITIZE_NUMBER_INT);
+                   // $_actividad->grupo          =   filter_var($_POST['surname_1'], FILTER_SANITIZE_STRING);
+                                 
+                   
         
                
                     echo "<pre>";
@@ -67,13 +61,13 @@
                     echo "</pre>";
                     echo "<hr>";
 
-                $_actividad->create__actividad_table();        
+                $_actividad->create_actividad_table();        
 
-                $_alias_nuevo_actividad = $_actividad->id;
+              
 
-                echo "alias :".$_actividad->name;
+               // echo "alias :".$_actividad->id;
                 
-                $_actividad_creado = new Usuario($_actividad->name);
+             /*   $_actividad_creado = new Actividad($_actividad->id);
 
                 echo "nuevo user despues de creado para recuperarlo de la tabla";
                 echo "<pre>";
@@ -81,10 +75,12 @@
                 echo "</pre>";
                 echo "<hr>";
 
+*/
+                    header("Location: ../actividades/actividades_bcn.php");
 
         }else{
             echo "CAMPOS DEL POST ALGUNO VACIO<hr>";
-            header("Location: ../formularios/form_altas.php");
+            header("Location: ../activities_forms/form_altas.php");
             die();
 
         }

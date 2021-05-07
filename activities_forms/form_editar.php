@@ -12,7 +12,12 @@
 
 
                 $_actividad = new Actividad($_GET['id']);
-              //  echo "llego con get <hr>";
+
+                  //SOLO PUEDE EDITAR SUS PROPIAS
+                  if($_actividad->voluntario != $_SESSION['id_user']){
+                      header ("Location : ../actividades/actividades_bcn.php");
+                  }
+           
 
                   
           }

@@ -355,3 +355,116 @@ function valida_pwd_nuevos(){
 		return false;
 	}
 }
+
+
+///*************ACTIVIDADES/************** */ */
+
+function rellena_nombre_actividad(){
+
+	var nombre = document.getElementById("nombre_actividad").value;
+	if (nombre == "") {
+			document.getElementById("message_nombre_actividad").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_nombre_actividad").innerHTML = "";
+				return true;
+		}
+
+}
+
+
+function rellena_descripcion_actividad(){
+
+	var nombre = document.getElementById("descripcion_actividad").value;
+	if (nombre == "") {
+			document.getElementById("message_descripcion_actividad").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_descripcion_actividad").innerHTML = "";
+				return true;
+		}
+
+}
+
+
+function rellena_direccion_actividad(){
+
+	var nombre = document.getElementById("direccion").value;
+	if (nombre == "") {
+			document.getElementById("message_direccion").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_direccion").innerHTML = "";
+				return true;
+		}
+
+}
+
+
+function rellena_fecha_inicio(){
+
+	var nombre = document.getElementById("fecha_inicio").value;
+	if (nombre == "") {
+			document.getElementById("message_fecha_inicio").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_fecha_inicio").innerHTML = "";
+				return true;
+		}
+
+}
+
+function rellena_fecha_fin(){
+
+	var nombre = document.getElementById("fecha_fin").value;
+	if (nombre == "") {
+			document.getElementById("message_fecha_fin").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_fecha_fin").innerHTML = "";
+				return true;
+		}
+
+}
+
+
+function rellena_duracion(){
+
+	var nombre = document.getElementById("duracion").value;
+	if (nombre == "") {
+			document.getElementById("message_duracion").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_duracion").innerHTML = "";
+				return true;
+		}
+
+}
+
+
+
+function rellena_num_participantes(){
+
+	var nombre = document.getElementById("num_participantes").value;
+	if (nombre == "") {
+			document.getElementById("message_num_participantes").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_num_participantes").innerHTML = "";
+				return true;
+		}
+
+}
+
+
+
+
+function valida_form_actividades(){
+	if (rellena_nombre_actividad()&& rellena_descripcion_actividad() && rellena_direccion_actividad() && rellena_fecha_fin() && rellena_fecha_inicio() && rellena_duracion() && rellena_num_participantes()){
+		//	AMBOS CAMPOS RELLENADOS SIN ERRORES
+		if (document.getElementById("politica").checked){
+			return true;
+		}else{
+			alert("ACEPTA LA POLITICA DE DATOS");
+			return false;
+		}
+
+	}else{
+		//	CAMPOS SIN RELLENAR
+		return false;
+	}
+}
+

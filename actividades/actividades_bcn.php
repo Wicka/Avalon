@@ -1,6 +1,7 @@
 <?php
 include ("../classes/Actividad.php");
 include ("../db/genera_vistas_html.php");
+session_start();
 ?>
 
 ﻿<doctype html>
@@ -44,7 +45,14 @@ include ("../db/genera_vistas_html.php");
 				
 
 				</header>
-
+				<section class = "contenedor">
+					<div>
+						<?php 
+						echo "Usuario Id : ". $_SESSION['id_user']."<br>";
+						echo "Nombre : ".  $_SESSION['alias_user'];
+						?>
+					</div>
+				</section>
 
 				<section>
 					

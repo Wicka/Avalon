@@ -11,7 +11,7 @@
               public $ambito;
               public $name;
               public $descripcion;
-              public $habilitada;     
+              public $adaptada;     
 
               public $fecha_inicio;
               public $fecha_fin;
@@ -61,7 +61,7 @@
                       $this->name               = $fila['name'];
                       $this->ambito             = $fila['id_ambito'];
                       $this->descripcion        = $fila['descripcion'];
-                      $this->habilitada         = $fila['habilitada'];
+                      $this->adaptada           = $fila['adaptada'];
                       
                       $this->fecha_inicio       = $fila['fecha_inicio'];
                       $this->fecha_fin          = $fila['fecha_fin'];
@@ -72,7 +72,7 @@
                       $this->voluntario         = $fila['id_voluntario'];
 
                       $this->grupo              = $fila['id_grupo'];
-                      $this->poblacion             = $fila['id_poblacion'];
+                      $this->poblacion           = $fila['id_poblacion'];
                       $this->direccion          = $fila['direccion'];                
                       
                     }
@@ -239,7 +239,7 @@
           function create_actividad_table(){
 
 
-              $_hash_pwd = $this->codifica_PWD($this->pwd);
+            
 
               echo "Dentro CREATE de clase ";
               echo "<pre>";
@@ -248,41 +248,44 @@
 
                 $conn=Connect_BBDD();
 
-                $SQL_insert= "INSERT INTO `actividad`
-                (`id_tipo`,
-                `id_estado`,
-                `id_disponibilidad`,
-                `alias`,
-                `email`,
-                `pwd`,
-                `create_date`,
-                `last_connection`,
-                `id_tipo_documento`,
-                `num_documento`,
+                $SQL_insert= "INSERT INTO `actividades`
+                (`id_ambito`,
+                `adaptada`,
                 `name`,
-                `surname_01`,
-                `surname_02`,
-                `birth_date`,
-                `id_titulacion`,
-                `sector_estudios`)
+                `descripcion`,
+                `num_participante`,
+                `fecha_inicio`,
+                `fecha_fin`,
+
+                `hora_inicio`,
+                `hora_fin`,
+
+                `duracion`,
+                `id_voluntario`,
+
+                `id_poblacion`,
+                `direccion`,
+                `id_grupo`
+                )
       
                   VALUES
-                  ('$this->id_tipo  ',
-                    '1',
-                    '$this->id_disponibilidad',
-                    '$this->alias',
-                    '$this->email ',
-                    '$_hash_pwd ',
-                    current_timestamp(),
-                    current_timestamp(),
-                    '$this->id_tipo_documento',
-                    '$this->num_documento ',
+                  ('$this->ambito  ',
+                    '$this->adaptada',
                     '$this->name',
-                    '$this->surname_01 ',
-                    '$this->surname_02 ',
-                    '$this->birth_date',
-                    '$this->id_titulacion ',
-                    '$this->sector_estudios');";
+                    '$this->descripcion',
+                    '$this->num_participante ',                    
+                    '$this->fecha_inicio',
+                    '$this->fecha_fin ',
+
+                    '$this->hora_inicio',
+                    '$this->hora_fin ',
+
+                    '$this->duracion ',
+                    '$this->voluntario',
+
+                    '$this->poblacion ',
+                    '$this->direccion',
+                    '$this->grupo');";
 
 
 
