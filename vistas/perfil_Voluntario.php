@@ -72,7 +72,7 @@
 
               <div   class="div_menu" >
                     <ul class="nav">
-                      <li> <a href="../formularios/form_editar.php"> Editar</a></li>
+                      <li> <a href="../users_forms/form_editar.php"> Editar</a></li>
                       
 
 
@@ -82,7 +82,7 @@
                             echo "<li> <a href='../crud_users/estado.php'> Alta</a></li> ";
           
                           }else{
-                            echo "<li> <a href='../formularios/form_baja.php'> Baja</a></li> ";
+                            echo "<li> <a href='../users_forms/form_baja.php'> Baja</a></li> ";
                           }
 
                         ?>

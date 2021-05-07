@@ -156,7 +156,7 @@ color:white;
     background-size: cover;
 }
 
-#actividades{
+#actividades, #editar_activities, #altas_activities{
   background-color: teal;
 }
 

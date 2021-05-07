@@ -1,8 +1,6 @@
 <?php
  
 
-      //include ("../json/actividades.php");
-
       function crea_lista_html($_array){
         $_lista="";
 
@@ -30,7 +28,7 @@
                         <td>".$value['sector_estudios']."</td>
                         <td>".$value['name']."</td>
                         <td>".$value['surname_01']."</td>                       
-                        <td> <a href='../formularios/form_editar.php?id=$value[alias]'> Editar </a> </td>
+                        <td> <a href='../users_forms/form_editar.php?id=$value[alias]'> Editar </a> </td>
                   </tr>";
 
         
@@ -46,8 +44,16 @@
           foreach ($_actividades as $Key => $value){
               $_items=$_items.
               "<div class='div_actividades'>"
-              .$value['direccion'].
-              "</div>";
+
+                .$value['direccion']."<br>"
+                .$value['fecha_inicio']."<hr>
+                 Participantes : ".$value['num_participante']."<hr>"
+                .$value['descripcion']."<br><hr><hr>
+                <a href='../activities_forms/form_editar.php?id=$value[id]'> Editar </a>
+      
+
+
+              </div>";
           }
 
 

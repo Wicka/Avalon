@@ -27,31 +27,39 @@ include ("../db/genera_vistas_html.php");
 		<body id="actividades">
 
 				<header>
-							<div class="contenedor">
+						
+					<div class="contenedor">
 
-									
-							</div>
-							<br>
+						<div   class="div_menu" >
+							<ul class="nav">
+							<li> <a href="../index.php">Inicio</a> </li>                
+							<li> <a href="../sesiones/destroy_session.php"> Logout</a></li>
+							<li> <a href="../activities_forms/form_altas.php"> Nueva</a></li>
+
+							</ul>
+						</div>
+						
+					</div>
+
+				
 
 				</header>
 
 
 				<section>
+					
+
+
+
+
+
 
 						<div class="div_contenedor_actividad">
 
-								<?php
+								<?php									
 									
-									
-									$_actividad = new Actividad();
+									$_actividad = new Actividad(-1);
 									$_arry_actividades = $_actividad->get_all_activities();
-
-/*
-									echo "formulario actividades : <hr>";
-									echo "<pre>";
-									print_r(  $_arry_actividades );
-									echo "</pre>";
-*/
 
 									echo crea_lista_actividades($_arry_actividades);
 

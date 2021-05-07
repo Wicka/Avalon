@@ -64,8 +64,8 @@
               <div   class="div_menu" >
               <br><br>
                     <ul class="nav">
-                      <li> <a href="../formularios/form_editar.php"> Editar</a></li>
-                      <li> <a href="../formularios/form_eliminar.php"> Eliminar</a></li>
+                      <li> <a href="../users_forms/form_editar.php"> Editar</a></li>
+                      <li> <a href="../users_forms/form_eliminar.php"> Eliminar</a></li>
                       <li> <a href="../sesiones/destroy_session.php"> Logout</a></li>
 
                       </ul>

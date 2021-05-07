@@ -7,8 +7,9 @@
       {
             //ATRIBUTS USUARIO
                //ATRIBUTS USUARIO
-              public $id=-1;
+              public $id;
               public $ambito;
+              public $name;
               public $descripcion;
               public $habilitada;     
 
@@ -22,7 +23,7 @@
 
               public $grupo;
 
-              public $ciudad;
+              public $poblacion;
               public $direccion;
           
 
@@ -33,10 +34,16 @@
                          
               //CONSTRUCTOR
              
-             function __construct(){                
+             function __construct($_id){        
+                  
+                  $this->id                 = $_id;        
                   
                   $conn=Connect_BBDD();
-                  $Query = "SELECT * FROM actividades";    
+                  $Query = "SELECT * FROM actividades WHERE id = '$this->id'";    
+
+                
+               
+
                   if($conn->connect_error){
                     echo "Fallo en la conexion a la BBDD : ".$conn->connect_error;
                  //   die();
@@ -48,9 +55,11 @@
         
                     while($fila = $_actividad->fetch_assoc()) {
         
-
-                      $this->id                 = $fila['id'];
-                      $this->ambito             = $fila['ambito'];
+                  
+                      
+                      //$this->id                 = $fila['id'];
+                      $this->name               = $fila['name'];
+                      $this->ambito             = $fila['id_ambito'];
                       $this->descripcion        = $fila['descripcion'];
                       $this->habilitada         = $fila['habilitada'];
                       
@@ -63,7 +72,7 @@
                       $this->voluntario         = $fila['id_voluntario'];
 
                       $this->grupo              = $fila['id_grupo'];
-                      $this->ciudad             = $fila['id_ciudad'];
+                      $this->poblacion             = $fila['id_poblacion'];
                       $this->direccion          = $fila['direccion'];                
                       
                     }
@@ -95,7 +104,7 @@
      
                  if($conn->connect_error){
                    echo "Fallo en la conexion a la BBDD : ".$conn->connect_error;
-                //   die();
+                   die();
                  }
      
                  $_actividades = $conn->query($Query);
@@ -112,20 +121,20 @@
      
                $conn->close();
      
-     /*
-              
-               echo "dentro de clase user ARRAY : <hr>";
-               echo "<pre>";
-               print_r(  $_arry_actividades );
-               echo "</pre>";
-     
-    */
-     
      
                  return $_arry_actividades;
              }
      
      
+
+
+
+
+
+
+
+
+
 
 
           
