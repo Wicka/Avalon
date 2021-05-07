@@ -1,13 +1,15 @@
 <?php   session_start();
 
-  include ("../db/conexio_bbdd.php");
-  include ("../db/get_datas.php");
-  include ("funciones_seguridad.php");
+  //include ("../db/conexio_bbdd.php");
+  //include ("../db/get_datas.php");
+  //include ("funciones_seguridad.php");
+  include ("../classes/Usuario.php");
 
 
-  if(isset($_SESSION['user'])){
-          $conn  = Connect_BBDD();
-          $_user = get_user_by_alias($_SESSION['user'], $conn );
+  if(isset($_SESSION['alias_user'])){
+          //$conn  = Connect_BBDD();
+          //$_user = get_user_by_alias($_SESSION['alias_user'], $conn );
+          $_user = new Usuario($_SESSION['alias_user']);
 
       }else{
           header("Location: ../sesiones/destroy_session.php");
@@ -59,7 +61,7 @@
 
       </header>
 
-      <form onsubmit="return valida_pwd_nuevos();" class="login" action="cambiar_pwd.php" method="POST" enctype='multipart/form-data'>
+      <form onsubmit="return valida_pwd_nuevos();" class="login" action="form_cambiar_pwd.php" method="POST" enctype='multipart/form-data'>
 
 
 				    <section class ="contenedor">
@@ -67,14 +69,14 @@
                 <div class="division_vertical">
                       <hr><hr>
                       <?php
-                          if(file_exists("../img/users/".$_user['id'].".png")){
-                                $_foto = "../img/users/".$_user['id'].".png";
+                          if(file_exists("../img/users/".$_user->id.".png")){
+                                $_foto = "../img/users/".$_user->id.".png";
                               }else{
                                 $_foto = "../img/users/0.png";
                             }
                             echo "<img src=$_foto alt='foto perfil'>";
                         ?>
-                        <h1><?php echo strtoupper($_SESSION['user']);?></h1><hr>
+                        <h1><?php echo strtoupper($_user->alias);?></h1><hr>
                         <hr><br><br><hr>
 
                 </div>
@@ -119,25 +121,20 @@
                 //          echo "si hay contraseña actual <hr>";
                           //VERIFICA SI PWD ES CORRECTO
                 //          echo "VERIFICAR PWD<hr>";
+              
 
 
-                          if (verifica_Pwd($_POST['actual_pwd'], $_user['pwd'])){
+                          if ($_user->verifica_Pwd($_POST['actual_pwd'])){
                 //            echo "PWD CORRECTO : <hr>";
                 //            echo "VOY A CAMBIAR TU CONTRASEÑA <hr>";
                 //            echo "CODIFICARE TU NUEVA PWD<hr>";
-                            $_nueva_pwd_hash =  codifica_PWD($_POST['pwd']);
+                            $_user->pwd =  $_user->codifica_PWD($_POST['pwd']);
                             //genero sql update y guardo nueva $_nueva_pwd_hash
 
-                            $_id=$_user['id'];
+                            $_user->update_pwd_user();
 
-                            $conn=Connect_BBDD();
-                            $_sql_Update="UPDATE `users`
-                                SET
-                                pwd='$_nueva_pwd_hash'
-                                WHERE  id= '$_id';";
-
-                            //EJECUTO LA QUERY INSERTAR NUEVO USUARIO
-                            $res_Insert_QUERY = $conn->query($_sql_Update);
+                         //   $conn=Connect_BBDD();
+                        
                               echo "CONTRASEÑA MODIFICADA<hr>";
                           }else{
                               echo "CONTRASEÑA INCORRECTA<hr>";

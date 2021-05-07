@@ -1,17 +1,24 @@
 <?php   session_start();
-
-  include ("../db/conexio_bbdd.php");
-  include ("../db/get_datas.php");
+  include ("../classes/Usuario.php");
 
 
-  if(isset($_SESSION['user'])){
-          $conn  = Connect_BBDD();
-          $_user = get_user_by_alias($_SESSION['user'], $conn );
+  if(isset($_SESSION['alias_user'])){
+     
+          $_user = new Usuario($_SESSION['alias_user']);
+
+          if ($_user->id_tipo == 1){
+            //TIPO 1 ADMIN
+             
+            }else{
+                header("Location: ../sesiones/destroy_session.php");
+                die();
+            }
 
       }else{
           header("Location: ../sesiones/destroy_session.php");
           die();
         }
+
 ?>
 
 
@@ -57,46 +64,33 @@
 
       </header>
 
-      <form onsubmit="return valida_form();" class="login" action="../db/eliminar.php" method="POST" enctype='multipart/form-data'>
+      <form onsubmit="return valida_form();" class="login" action="../form_eliminar.php" method="POST" enctype='multipart/form-data'>
 
 
 				    <section class ="contenedor">
 
                 <div id="div_eliminar" class="division_vertical">
 
-                      <hr><hr>
-                      <?php
-                          if(file_exists("../img/users/".$_user['id'].".png")){
-                                $_foto = "../img/users/".$_user['id'].".png";
-                              }else{
-                                $_foto = "../img/users/0.png";
-                            }
-
-                            echo "<img src=$_foto alt='foto perfil'>";
-
-                        ?>
-                        <h1><?php echo strtoupper($_SESSION['user']);?></h1><hr>
+                     
+                        <h1><?php echo strtoupper($_user->alias)." (";
+                                 echo $_user->get_descripcion_tipo_usuario()['descripcion']." )";
+                                  
+                                  ?></h1><hr>
                     
-                        <span style="color:red"> SEGURO QUIERES ELIMINAR ?</span>
-                        <hr>
+                    <div id="div_option_delete" class="div_radio">
+                          
+                          <input type="radio" id="del_voluntarios" name="radio_delete" value=11>
+                          <label for="voluntario">Voluntarios</label><br>
 
-                        <div class="eliminar_op">
-                              <input type="radio" id="permanecer" name="eliminar" value="0" >
-                              <label for="permanecer">Conservar datos para comunicaciones</label><br><hr>
+                          <input type="radio" id="del_usuarios" name="radio_delete" value=12  checked>
+                          <label for="usuario">Usuarios</label> <br>
+
+                          <input type="radio" id="del_actividades" name="radio_delete" value=21  checked>
+                          <label for="usuario">Actividades</label>  <hr>
+
+                    </div>
 
 
-                            <input type="radio" id="inactivo" name="eliminar" value="4"  checked>
-                            <label for="permanecer">Desactivar Cuenta y mantener clasificación</label><br><hr>
-
-
-                            <input type="radio" id="eliminar" name="eliminar" value="-1" >
-                            <label for="eliminar"><span style="color:red">Eliminar todo y perder clasificación <br> * Se perderan todos los datos !!.</span></label><br><hr>
-
-                        </div>
-                        <div class="div_cancelar">
-                            <a id="cancelar_botones" href="../vistas/perfil_usuario.php">CANCELAR</a>
-                        </div>
-                        <hr>
                 </div>
 
       						<div id="div_alta" class="division_vertical">
@@ -104,35 +98,59 @@
 
                     <p>
                       <?php
-                      echo "Hola  ".strtoupper($_user['alias']);
+                      echo "Hola  ".strtoupper($_user->alias);
                       echo "<hr>";
-                      echo "Nombre : ".$_user['name']."<br>";
-                      echo "Apellido 1 : ".$_user['surname_01']."<br>";
-                      echo "Apellido 2 : ".$_user['surname_02']."<br>";
-                      echo "<hr>";
-                      echo "Email : ".$_user['email'];
-                      echo "<hr>";
-                      echo "Fecha Nacimiento : ".$_user['birth_date'];
-                      echo "<hr>";
-                      echo "Antiguedad : ".$_user['create_date'];
-                      echo "<hr>";
-                      echo "Ultima conexion : ".$_user['last_connection'];
+                  
                       echo "<hr>";
                       ?>
                       </p>
 
       									<hr>
-      									<div class="div_button" ><input id="button" type="submit" name="Aceptar" value="ELIMINAR"></div>
+      									<div class="div_button" ><input id="button" type="submit" name="Aceptar" value="MOSTRAR"></div>
 
       							</div>
 
 				      </section>
 
          </form>
+         <section  class ="contenedor">
+          <?php
+            echo "RESULTADOR DE POST <HR>";
+            echo "TABLA SEGUN OPCON";
+          ?>
+
+<div> solo los registros que tengan su campo id_esta a borrar por solicitud de usuario
+                     <p>tabla</p>
+                     <table>
+                          <tr>
+                            <th>alias</th>
+                            <th>tipo</th>
+                            <th>estado</th>
+                            <th>email</th>
+                            <th>disponiblidad</th>
+                            <th>sector</th>
+                            <th>name</th>
+                            <th>surname</th>                           
+                            <th>ELIMINAR</th>
+
+                          </tr>
+                          <td>pepe</td>
+                          <td>pepe</td>
+                          <td>pepe</td>
+                          <td>pepe</td>
+                          <td>pepe</td>
+                          <td>pepe</td>
+                          <td>pepe</td>
+                          <td>pepe</td>
+                          <td>pepe</td>
+                        
+                     </table>
+                </div>
+         </section>
 
 			<br><hr>
 
-  		<footer>Avalon 2021 by Wicka</footer>
+  		<footer>Avalon Help 2021 by Wicka</footer>
 
 		</body>
 

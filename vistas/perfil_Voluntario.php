@@ -1,31 +1,40 @@
 <?php
-    session_start();
-    include ("../db/conexio_bbdd.php");
-    include ("../db/get_datas.php");
 
-    if(isset($_SESSION['user'])){
+    session_start();  
+    include ("../classes/Usuario.php");
 
-        $conn  = Connect_BBDD();
-        $_user = get_user_by_alias($_SESSION['user'], $conn );
+    if(isset($_SESSION['alias_user'])){     
+        
+       $_user =new Usuario($_SESSION['alias_user']);
 
-        if ($_user!=-1 and $_user['id_tipo']==2){
-            //usuario en tabla encontrado
-            //usuario activo
+        if ($_user->id_tipo==2){
+            //TIPO 2 VOLUNTARIO
 
-            if(file_exists("../img/users/".$_user['id'].".png")){
-                  $_foto = "../img/users/".$_user['id'].".png";
+            if(file_exists("../img/users/".$_user->id.".png")){
+                  $_foto = "../img/users/".$_user->id.".png";
                 }else{
                   $_foto = "../img/users/0.png";
                 }
-        }else{
-          echo "NO EXISTE USUARIO desde perfil_usuario o no esta activo<hr>";
-         // header("Location: ../sesiones/destroy_session.php");
-         header ("Location: ..");
+
+            if ($_user->id_estado !=1){
+                //estado 2 de Baja
+                //estado 3 solicitud de eliminacion cuenta
+            //    echo "USUARIO NO ACTIVO<hr>";
+                if($_user->id_estado ==2){
+                  //MENU DE ACTIVAR CUENTA
+
+                }else{
+                  header("Location: ../sesiones/destroy_session.php");
+                  die();
+                }
+            }
+        }else{         
+          header("Location: ../sesiones/destroy_session.php");
+          die();
         }
 
     }else{
-   //     header("Location: ../sesiones/destroy_session.php");
-        header ("Location: ..");
+        header("Location: ../sesiones/destroy_session.php");   
         die();
     }
  ?>
@@ -48,11 +57,14 @@
  				<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
 
- 				<title>Gestion Usuario</title>
+ 				<title>Perfil Voluntario</title>
 
  		</head>
 
+
  		<body id="perfil_voluntario">
+
+        <p class="titulo">Avalon Help</p>
 
  				<header>
 
@@ -61,7 +73,21 @@
               <div   class="div_menu" >
                     <ul class="nav">
                       <li> <a href="../formularios/form_editar.php"> Editar</a></li>
-                      <li> <a href="../formularios/form_eliminar.php"> Eliminar</a></li>
+                      
+
+
+                      <?php
+                          if($_user->id_estado ==2){
+                            //MENU DE ACTIVAR CUENTA
+                            echo "<li> <a href='../crud_users/estado.php'> Alta</a></li> ";
+          
+                          }else{
+                            echo "<li> <a href='../formularios/form_baja.php'> Baja</a></li> ";
+                          }
+
+                        ?>
+                            
+
                       <li> <a href="../sesiones/destroy_session.php"> Logout</a></li>
 
                       </ul>
@@ -74,67 +100,54 @@
             <div id="detalle_user" class="division_vertical">
 
                 <p>
-                  <?php
-                    if ($_user!=-1 and $_user['id_estado']==1){
+                  <?php              
+                        echo "Hola  ".strtoupper($_user->alias);
+                        echo " (". $_user->get_descripcion_tipo_usuario()['descripcion']." )<hr>";
+                   ?>
+                </p>
 
-                      echo "Hola  ".strtoupper($_user['alias']);
-                      echo "<hr>";
-                   
-                   /*   echo "Nombre : ".$_user['name']."<br>";
-                      echo "Apellido 1 : ".$_user['surname_01']."<br>";
-                      echo "Apellido 2 : ".$_user['surname_02']."<br>";
-                      echo "<hr>";
-                      echo "Email : ".$_user['email'];
-                      echo "<hr>";
-                      echo "Fecha Nacimiento : ".$_user['birth_date'];
-                      echo "<hr>";
-                      echo "Antiguedad : ".$_user['create_date'];
-                      echo "<hr>";
-                      echo "Ultima conexion : ".$_user['last_connection'];
-                      echo "<hr>";
-                      */
+                <div>
 
-                  
-                      $conn =Connect_BBDD();
-                    //  $_estado=get_status_by_id($_user['id_estado'], $conn);
-                    
-                      //$_tipo_usuario=get_status_by_id($_user['id_tipo'], $conn);
-                      $_tipo_usuario=get_tipo_usuario_by_id($_user['id_tipo'], $conn);
-
-
-                     // echo "Usuario : ".$_estado['status'];
-                      echo "Usuario : ".$_tipo_usuario['descripcion'];
-                      echo "<hr>";
-                   //   echo "Clasificación : ".$_user['clasificacion'];
-
-              
-                    }
-
-                    ?>
-                  </p>
-
-                  <div>
-                        <nav>
+                     <?php 
+                        if($_user->id_estado ==2){
+                          //menu activar usuario
+                          echo "
+                          <nav>
                             <ul>
-                                <li>Ver Actividades de tu interes Para realizar</li>
-                                <li>Ver Actividades en tu franja horaria para realizar</li>
-                                <li>Ver todas las Actividades por asignarse</li>
-                                <li>Ver todas las Actividades activas</li>
-                                <li>Aceptar Actividades asignar tope usuarios, fecha y Publicar</li>
-                                   
+                            <li>Activar Cuenta Para participar actividades</li>                                                     
                             </ul>
-                        </nav>
-                  </div>
+                          </nav>
+                        ";
+                          
+                        }else{
+                          //menu normal
+                          echo "
+                          <nav>
+                            <ul>
 
+                                <li> <a href='../actividades/actividades_bcn.php'> Actividades</a></li>
+                                <li> <a href='../actividades/parques.php'> Parques</a></li>
+                  
+                                <li>Ver Actividades de tu interes</li>
+                                <li>Ver Actividades en tu franja horaria</li>
+                                <li>Ver todas las Actividades</li>
+                                <li>Ver Propuestas</li>
+                                <li>Crear Propuestas</li>                                
+                            </ul>
+                          </nav>
+                        ";
+                        }
+                     
+                     ?>
+                 
+                </div>
 
             </div>
 
 
            <div class="division_vertical">
 
-
-                     <img  class='foto_perfil' src=<?php if ($_user!=-1){
-                       echo $_foto;} ?> alt="foto perfil">
+                     <img  class='foto_perfil' src=  <?php if ($_user->id!=-1){echo $_foto;} ?> alt="foto perfil">
            
                       <div>
                           <?php
@@ -150,7 +163,7 @@
 
  			<br><hr>
 
-   		<footer>Avalon 2021 by Wicka</footer>
+   		<footer>Avalon Help 2021 by Wicka</footer>
 
  		</body>
 

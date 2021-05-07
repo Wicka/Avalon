@@ -43,7 +43,7 @@ function valida_login(){
 
 function check_alias() {
 		var resultat =  $.ajax({ //ajax
-				url: "../db/checkuser.php", //l'arxiu php que valida
+				url: "../verificaciones/checkuser.php", //l'arxiu php que valida
 				data: {alias:$("#alias").val()}, //el nom del campo post con el valor campo html
 				type: "POST", //tipus d'enviament (POST)
 
@@ -94,7 +94,7 @@ function rellena_email(){
 
 function check_email() {
 		var resultat =  $.ajax({ //ajax
-		url: "../db/checkemail.php", //l'arxiu php que valida
+		url: "../verificaciones/checkemail.php", //l'arxiu php que valida
 		data: {email:$("#email").val()}, //el nom de l'usuari
 		type: "POST", //tipus d'enviament (POST)
 
@@ -148,6 +148,72 @@ function rellena_surname_1(){
 				}
 }
 
+
+
+function mostrar_menu(menu){
+	console.log(menu);
+	switch (menu) {
+
+		case 'voluntario':
+
+			if ( $("#voluntario").prop('checked') ){	
+
+				$("#actividades").prop('checked',false);
+				$("#seleccion_actividades").addClass("invisible");
+
+			
+				$("#seleccion_users").removeClass("invisible");
+			}else{
+
+				if ( $("#usuario").prop('checked')){
+
+				}else{
+					$("#seleccion_users").addClass("invisible");
+				}			
+			}		
+			
+		break;
+		case 'usuario':	
+		
+			if ( $("#usuario").prop('checked') ){
+				
+				$("#actividades").prop('checked',false);
+				$("#seleccion_actividades").addClass("invisible");
+
+				
+				$("#seleccion_users").removeClass("invisible");
+			
+			}else{
+
+				if ( $("#voluntario").prop('checked')){
+
+				}else{
+					$("#seleccion_users").addClass("invisible");
+				}
+
+			}
+			
+		break;
+		case 'actividades':	
+		
+			if ( $("#actividades").prop('checked') ){
+
+						$("#voluntario").prop('checked',false); 
+						$("#usuario").prop('checked',false); 					
+						$("#seleccion_users").addClass("invisible");	
+
+						$("#seleccion_actividades").removeClass("invisible");
+			}else{
+
+				$("#seleccion_actividades").addClass("invisible");
+			}
+				
+		break;
+				
+		default:
+		break;
+	}
+}
 
 /**************************************************************/
 /*NO ES CAMPO OBLIGATORIO

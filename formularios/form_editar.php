@@ -1,21 +1,38 @@
 <?php   session_start();
 
-  include ("../db/conexio_bbdd.php");
-  include ("../db/get_datas.php");
+  //include ("../db/conexio_bbdd.php");
+  //include ("../db/get_datas.php");
+  include ("../classes/Usuario.php");
 
 
-  if(isset($_SESSION['user'])){
-          $conn  = Connect_BBDD();
-          $_user = get_user_by_alias($_SESSION['user'], $conn );
+if (isset($_GET['id'])==null){
+ 
 
-      }else{
-          header("Location: ../sesiones/destroy_session.php");
-          die();
-        }
+      if(isset($_SESSION['alias_user'])){
+        //$conn  = Connect_BBDD();
+        //$_user = get_user_by_alias($_SESSION['alias_user'], $conn );
+        $_user = new Usuario($_SESSION['alias_user']);
+
+    }else{
+    //     header("Location: ../sesiones/destroy_session.php");
+    //    die();
+    echo "NO SESSION USER<HR>";
+      }
+
+}else{
+
+
+      $_user = new Usuario($_GET['id']);
+    //  echo "llego con get <hr>";
+
+        
+}
+
+
 ?>
 
 
-﻿<doctype html>
+ ﻿<doctype html>
 <html lang="es">
 
 		<head>
@@ -49,7 +66,7 @@
               <div   class="div_menu" >
                   <ul class="nav">
                     <li> <a href="../index.php">Inicio</a> </li>
-                    <li> <a href="../seguridad/cambiar_pwd.php">Contraseña</a> </li>
+                    <li> <a href="form_cambiar_pwd.php">Contraseña</a> </li>
                     <li> <a href="../sesiones/destroy_session.php"> Logout</a></li>
 
                   </ul>
@@ -58,7 +75,7 @@
 
       </header>
 
-      <form onsubmit="return valida_form();" class="login" action="../db/editar.php" method="POST" enctype='multipart/form-data'>
+      <form onsubmit="return valida_form();" class="login" action="../crud_users/editar.php" method="POST" enctype='multipart/form-data'>
 
 
 				    <section class ="contenedor">
@@ -67,8 +84,8 @@
 
                       <hr><hr>
                       <?php
-                          if(file_exists("../img/users/".$_user['id'].".png")){
-                                $_foto = "../img/users/".$_user['id'].".png";
+                          if(file_exists("../img/users/".$_user->id.".png")){
+                                $_foto = "../img/users/".$_user->id.".png";
                               }else{
                                 $_foto = "../img/users/0.png";
                             }
@@ -76,9 +93,10 @@
                             echo "<img src=$_foto alt='foto perfil'>";
 
                         ?>
-                        <h1><?php echo strtoupper($_SESSION['user']);?></h1><hr>
+                        <h1><?php echo strtoupper($_user->alias);?></h1><hr>
                       <!--  <span style="color:red"> * Campos Obligatorios </span>-->
                         <hr>
+                        <input type="hidden" name="alias_oculto" id="alias_oculto" value=<?php echo  $_user->alias ?>>
 
                         <!--	<input type='hidden' name='MAX_FILE_SIZE' value='100000'> <br> -->
                         <div class="fitxer">
@@ -98,27 +116,27 @@
       			               	<span style="color:red">*</span> EMAIL <br>
       											<input  class="form_texto"  type="email" name="email" id="email" placeholder="email"  required
                             onblur="rellena_email();" oninput="check_email();"
-                            value='<?php echo $_user['email'];?>'>
+                            value='<?php echo $_user->email;?>'>
       											<div class="div_form_error" id="message_email"></div>
 
       			             		<span style="color:red">*</span>   NAME <br>
       			                <input  class="form_texto"  type="text" name="name" id="name" placeholder="name"  required
-                            onblur="rellena_name();" value='<?php echo $_user['name'];?>'>
+                            onblur="rellena_name();" value='<?php echo $_user->name;?>'>
       			                <div class="div_form_error" id="message_name"></div>
 
       			               	<span style="color:red">*</span> SURNAME_1 <br>
       			                <input  class="form_texto"  type="text" name="surname_1" id="surname_1" placeholder="surname_1"  required
-                            onblur="rellena_surname_1();" value='<?php echo $_user['surname_01'];?>'>
+                            onblur="rellena_surname_1();" value='<?php echo $_user->surname_01;?>'>
       			                <div class="div_form_error" id="message_surname_1"></div>
 
       			               	SURNAME_2 <br>
       			                <input  class="form_texto"  type="text" name="surname_2" id="surname_2" placeholder="surname_2"
-                            value='<?php echo $_user['surname_02'];?>'>
+                            value='<?php echo $_user->surname_02;?>'>
       			                <div class="div_form_error" id="message_surname_2"></div>
 
       			               	<span style="color:red">*</span> BIRTH DATE <br>
       			                <input  class="form_date"  type="date" name="birth" id="birth" placeholder="birth"  required
-                            onblur="rellena_birth();" value='<?php echo $_user['birth_date'];?>'>
+                            onblur="rellena_birth();" value='<?php echo $_user->birth_date;?>'>
 
 
       			                <div class="div_form_error" id="message_birth"></div>

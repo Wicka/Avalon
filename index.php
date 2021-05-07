@@ -1,9 +1,9 @@
 
 <?php
 		session_start();
-		if(isset($_SESSION['user'])){
+		if(isset($_SESSION['alias_user'])){
 
-			echo "user : ".$_SESSION['user'];
+			echo "user : ".$_SESSION['alias_user'];
 			echo "tipo : ".$_SESSION['tipo_user'];
 	//		echo "HOLA";
 			
@@ -61,7 +61,7 @@
 							<div id="div_login" class="division_vertical">
 									<h1>Bienvenido a Avalon</h1><hr><br>
 
-								<form onsubmit="return valida_login();" class="login" action="seguridad/verifico_user.php" method="POST">
+								<form onsubmit="return valida_login();" class="login" action="verificaciones/verifico_user.php" method="POST">
 
 												<div class="div_form_field">
 														<input  class="form_texto"  type="text" name="alias" id="alias"

@@ -1,5 +1,5 @@
 <?php
-      include ("conexio_bbdd.php");
+      include ("../db/conexio_bbdd.php");
 
       $conn = Connect_BBDD();
 
@@ -9,9 +9,9 @@
         die();
       }
 
-      if(!empty($_POST['email'])) { //si s’han enviat dades pel post
-        $_email = $_POST['email'];
-        $sql = "SELECT * FROM users WHERE email='$_email'"; //construïm consulta
+      if(!empty($_POST['alias'])) { //si s’han enviat dades pel post
+        $_alias = $_POST['alias'];
+        $sql = "SELECT * FROM users WHERE alias='$_alias'"; //construïm consulta
 
         //llancem la consulta
         $result = $conn->query($sql);

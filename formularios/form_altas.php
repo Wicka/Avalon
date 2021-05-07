@@ -1,13 +1,12 @@
 <?php
 
-  include ("../db/conexio_bbdd.php");
-  include ("../db/get_datas.php");
-  include ("../db/operaciones_db.php");
+  include ("../db/get_datas_aux.php");
+  include ("../db/genera_vistas_html.php");
 
   session_start();
 
 
-	if(isset($_SESSION['user'])){
+	if(isset($_SESSION['alias_user'])){
 		header("Location: ../vistas/perfil_usuario.php");
   echo "no sesion";
 	}
@@ -51,7 +50,7 @@
       </header>
 
 
-    	<form onsubmit="return valida_form();" class="form" action="../db/altas.php" method="POST" enctype='multipart/form-data'>
+    	<form onsubmit="return valida_form();" class="form" action="../crud_users/altas.php" method="POST" enctype='multipart/form-data'>
 
              <section class ="contenedor">
 
@@ -113,33 +112,29 @@
 
 
                     <div class="div_estudios">
+
                         <?php
                             echo "Nivel de estudios<hr>";
-                            $conn  = Connect_BBDD();
+                        
+                            $_estudios = get_all_estudios();
 
-                            $_estudios = get_all_estudios($conn);
-
-                            $_lista=crea_lista_html($_estudios);
-                            //echo $_lista;
+                            $_lista     = crea_lista_html($_estudios);                       
 
                             echo "<select name='nivel_estudio'>";
                             echo $_lista;
                             echo "</select>";
 
-
-
-
-
                          ?>
                     </div>
-                    <div class="div_sector">
-                        <?php
-                            echo "sector<hr>";
-                            $conn  = Connect_BBDD();
 
-                            $_sector = get_all_sections($conn);
+                    <div class="div_sector">
+
+                        <?php
+                            echo "sector<hr>";                       
+
+                            $_sector = get_all_sections();
                      
-                            $_lista=crea_lista_html($_sector);
+                            $_lista   = crea_lista_html($_sector);
                             echo "<select name='sector_estudio'>";
                             echo $_lista;
                             echo "</select>";

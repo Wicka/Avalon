@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if (isset( $_SESSION['user'])){
+    if (isset( $_SESSION['alias_user'])){
 
         if(session_destroy() == true){
           echo "No has iniciat sesio";
