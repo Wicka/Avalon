@@ -105,15 +105,33 @@
         foreach ($_actividades as $Key => $value){
 
 
-            $_items=$_items.
-            "<div class='div_actividades_usuario'>"
-              .$value['name']."<hr>"
-              .$value['direccion']."<br>"
-              .$value['fecha_inicio']."<hr>
-              Participantes : ".$value['num_participante']."<hr>"
-              .$value['descripcion']."<br><hr>                 
-              <a href='../actividades/baja.php?id=$value[id]'> Darse de Baja </a>
-              </div>";
+              if ($_SESSION['tipo_user']==2){//VOLUNTARIO
+
+                $_items=$_items.
+                "<div class='div_actividades_usuario'>"
+                  .$value['name']."<hr>"
+                  .$value['direccion']."<br>"
+                  .$value['fecha_inicio']."<hr>
+                  Participantes : ".$value['num_participante']."<hr>"
+                  .$value['descripcion']."<br><hr>                 
+                  <a href='../actividades/cerrar.php?id=$value[id]'> Cerrar Actividad </a>
+                  </div>";
+
+              }else{
+
+                    $_items=$_items.
+                    "<div class='div_actividades_usuario'>"
+                    .$value['name']."<hr>"
+                    .$value['direccion']."<br>"
+                    .$value['fecha_inicio']."<hr>
+                    Participantes : ".$value['num_participante']."<hr>"
+                    .$value['descripcion']."<br><hr>                 
+                    <a href='../actividades/baja.php?id=$value[id]'> Darse de Baja </a>
+                    </div>";
+
+              }
+
+          
         }
           
           return $_items;

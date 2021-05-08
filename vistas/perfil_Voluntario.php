@@ -125,14 +125,11 @@
                           <nav>
                             <ul>
 
-                                <li> <a href='../actividades/actividades_bcn.php'> Actividades</a></li>
+                                <li> <a href='../actividades/actividades_bcn.php'> Ver Actividades</a></li>
                                 <li> <a href='../actividades/parques.php'> Parques</a></li>
+                                <li><a href='../actividades/actividades_voluntario.php'>Ver tus Actividades</a></li>      
                   
-                                <li>Ver Actividades de tu interes</li>
-                                <li>Ver Actividades en tu franja horaria</li>
-                                <li>Ver todas las Actividades</li>
-                                <li>Ver Propuestas</li>
-                                <li>Crear Propuestas</li>                                
+                                               
                             </ul>
                           </nav>
                         ";
@@ -149,13 +146,25 @@
 
                      <img  class='foto_perfil' src=  <?php if ($_user->id!=-1){echo $_foto;} ?> alt="foto perfil">
            
-                      <div>
+
+                     <div>
                           <?php
-                            echo "tienes acumuladas X horas de activides <hr>";
-                            echo "tienes X ACTIVIDADES ABIERTAS POR FINALIZAR <hr>";
-                            echo "tienes acumuladas X horas de activides <hr>";
+                        
+
+                            $_actividades = $_user->get_activities_by_volunter();
+                            $_count_actividades_apuntadas =  count($_actividades);
+                            $_total_horas = $_user->get_total_horas();
+                        
+                      
+                            echo "Tienes : ".$_count_actividades_apuntadas." Actividades Activas <hr>";     
+                            echo "tienes acumuladas ".$_total_horas['horas']." horas de activides <hr>";                      
+                    
+
                           ?>
                       </div>
+
+
+                     
            </div>
 
 

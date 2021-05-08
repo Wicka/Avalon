@@ -247,12 +247,7 @@
                     }    
                 }
 
-             /*   echo "<pre>";
-                print_r($_actividades_id);
-                echo "</pre>";
-*/
-             
-
+               
                 for ($i=0; $i < count($_actividades_id); $i++){           
                   
                    $id_actividadd = $_actividades_id[$i]['id_actividad'];
@@ -277,6 +272,61 @@
               
             }
           
+
+
+
+            function get_activities_by_volunter(){
+
+            
+              $_actividades=[];
+
+              $conn=Connect_BBDD();           
+              $sql = "SELECT * FROM `actividades`  
+                      WHERE `id_voluntario`='$this->id' ";
+
+              $_actividades_user = $conn->query($sql);   
+
+              if($_actividades_user->num_rows > 0){  
+
+                while($fila = $_actividades_user->fetch_assoc()) {
+
+                  array_push($_actividades , $fila);                
+                }    
+            }
+
+                   
+            $conn->close();
+
+            return $_actividades;
+
+          
+        }
+
+
+        function get_total_horas(){
+
+                $conn=Connect_BBDD();           
+                $sql = "SELECT SUM(`duracion`) AS horas FROM actividades WHERE `id_voluntario`='$this->id' ";
+
+
+                $_horas_actividades_user = $conn->query($sql);   
+
+                if($_horas_actividades_user->num_rows > 0){  
+
+                    $_actividades = $_horas_actividades_user->fetch_assoc(); 
+                }
+
+
+                $conn->close();
+
+                return $_actividades;
+              
+
+        }
+
+
+
+
 
 
           function get_all_user_by_tipo_and_by_estado(){
