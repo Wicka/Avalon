@@ -26,7 +26,7 @@ if (isset($_GET['id'])==null){
 
 				<meta charset="utf-8"/>
 				<meta name="description" content="Avalon Help">
-				<meta name="keywords" content="actividades, apuntarse, usuario">
+				<meta name="keywords" content="actividades, baja, usuario">
 				<meta name="author" content="Ester Mesa">
 
 				<!-- Enllaç a l'arxiu CSS Extern -->
@@ -83,24 +83,25 @@ if (isset($_GET['id'])==null){
                               echo "Usuario Id : ". $_SESSION['id_user']." ( ".  $_SESSION['tipo_user']." )<br>";
                               echo "Nombre : ".  $_SESSION['alias_user'];
                               echo "<hr><br>";
-                              $_plazas=$_actividad->get_num_plazas();  
                            
-                              $_plazas_libres = $_actividad->num_participante - $_plazas['plazas'];
+                          //    $_plazas=$_actividad->get_num_plazas();                             
+                          //    $_plazas_libres = $_actividad->num_participante - $_plazas['plazas'];
 
-                              if ( $_plazas_libres > 0){
-                                    echo "Quedan ".$_plazas_libres." plazas libres <br><hr><br>";  
+                          //    if ( $_plazas_libres > 0){
+                           //         echo "Quedan ".$_plazas_libres." plazas libres <br><hr><br>";  
                                    
-                                    $id_user = $_SESSION['id_user'];
+                               $id_user = $_SESSION['id_user'];
+                               $_actividad->delete_user_actividad($id_user);
                                    
                                     
-                                    echo    "<form action = '../crud_activities/apuntarse.php' method='POST'>
+                         /*           echo    "<form action = '../crud_activities/apuntarse.php' method='POST'>
                                                 <input type='hidden' name='id_usuario' id='id_usuario' value =' $id_user'>
                                                 <input type='hidden' name='id_actividad' id='id_actividad' value =' $_actividad->id'>
-                                                <input type='submit' value='Apuntáme'>
-                                            </form>";
-                              }else{
-                                echo "NO Quedan plazas libres ";        
-                              }
+                                                <input type='submit' value='Darme de Baja'>
+                                            </form>";*/
+                          //    }else{
+                           //     echo "NO Quedan plazas libres ";        
+                          //    }
                                             
                             
 						?>

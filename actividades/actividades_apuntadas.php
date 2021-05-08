@@ -1,5 +1,5 @@
 <?php
-include ("../classes/Actividad.php");
+include ("../classes/Usuario.php");
 include ("../db/genera_vistas_html.php");
 session_start();
 ?>
@@ -11,7 +11,7 @@ session_start();
 
 				<meta charset="utf-8"/>
 				<meta name="description" content="Avalon Help">
-				<meta name="keywords" content="actividades, voluntario">
+				<meta name="keywords" content="actividades, apuntadas, usuario">
 				<meta name="author" content="Ester Mesa">
 
 				<!-- Enllaç a l'arxiu CSS Extern -->
@@ -22,7 +22,7 @@ session_start();
 				<!-- google font -->
 				<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 
-				<title>activitats_bcn</title>
+				<title>apuntadas activitats_bcn</title>
 		</head>
 
 		<body id="actividades">
@@ -49,36 +49,32 @@ session_start();
 					<div>
 						<?php 
 						echo "Usuario Id : ". $_SESSION['id_user']." ( ".  $_SESSION['tipo_user']." )<br>";
-						echo "Nombre : ".  $_SESSION['alias_user'];
+						echo "Nombre : ".  $_SESSION['alias_user']."<hr>";
+						$_user=new Usuario ($_SESSION['alias_user']);
+                        $_actividades = $_user->get_activities_by_user();
+                        $_count_actividades_apuntadas =  count($_actividades);
+                    
+                        echo "Estas apuntado a : ".$_count_actividades_apuntadas." Actividades <hr>";
 					
 						?>
 					</div>
 				</section>
 
-				<section>
-					
+				<section class ="contenedor">
 
+                <div class="div_contenedor_actividad">
 
+                        <?php
 
+                
+						echo crea_lista_actividades_apuntadas($_actividades);
 
-
-
-						<div class="div_contenedor_actividad">
-
-								<?php									
-									
-									$_actividad = new Actividad(-1);
-									$_arry_actividades = $_actividad->get_all_activities();
-
-									echo crea_lista_actividades($_arry_actividades);
-
-								?>
-
-							
-						</div>
+                        ?>
+                   </div>
 
 				</section>
 
+            
 
 			<br>
   		<footer>Avalon Help 2021 by Wicka</footer>

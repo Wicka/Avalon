@@ -45,6 +45,7 @@
                     $_user->id_disponibilidad   =   $_disponibilidad;
                     $_user->alias               =   filter_var(strtolower(trim($_POST['alias'])), FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW);
                     $_user->email               =   filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
+                    $_user->telefono            =   filter_var(trim($_POST['telefono']), FILTER_SANITIZE_STRING);
 
                     $_user->pwd                 =   filter_var($_POST["pwd"], FILTER_SANITIZE_STRING);
 

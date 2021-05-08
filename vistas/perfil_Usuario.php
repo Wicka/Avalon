@@ -123,11 +123,8 @@
                           echo "
                                 <nav>
                                   <ul>
-                                      <li><a href='../actividades/actividades_bcn.php'>Actividades</a></li>
-                                      <li>Ver Actividades en tu franja horaria</li>
-                                      <li>Ver todas las Actividades</li>
-                                      <li>Ver Propuestas</li>
-                                      <li>Crear Propuestas</li>                                
+                                      <li><a href='../actividades/actividades_bcn.php'>Listar todas las Actividades</a></li>                                                                 
+                                      <li><a href='../actividades/actividades_apuntadas.php'>Ver tus Actividades</a></li>      
                                   </ul>
                                 </nav>
                               ";
@@ -153,9 +150,13 @@
            
                       <div>
                           <?php
-                            echo "tienes acumuladas X horas de activides <hr>";
-                            echo "tienes X ACTIVIDADES ABIERTAS POR FINALIZAR <hr>";
-                            echo "tienes acumuladas X horas de activides <hr>";
+
+                            $_actividades = $_user->get_activities_by_user();
+                            $_count_actividades_apuntadas =  count($_actividades);
+                      
+                            echo "Estas apuntado a : ".$_count_actividades_apuntadas." Actividades <hr>";                           
+                    
+
                           ?>
                       </div>
            </div>

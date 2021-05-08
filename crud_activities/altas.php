@@ -18,7 +18,7 @@
 
     if($_POST!=null){
 
-        if($_POST['nombre_actividad']!=null and $_POST['descripcion_actividad']!=null and $_POST['direccion']!=null and $_POST['fecha_inicio']!=null and $_POST['fecha_fin']!=null and $_POST['duracion']!=null  and $_POST['num_participantes']!=null){
+        if($_POST['nombre_actividad']!=null and $_POST['descripcion_actividad']!=null and $_POST['direccion']!=null and $_POST['fecha_inicio']!=null and $_POST['fecha_fin']!=null and $_POST['duracion']!=null  and $_POST['num_participantes']!=null  and $_POST['hora_inicio']!=null  and $_POST['hora_fin']!=null ){
 
 
                     $_actividad = new Actividad("");
@@ -47,8 +47,8 @@
                     $_actividad->adaptada               =  filter_var(trim($_adaptada), FILTER_SANITIZE_NUMBER_INT);  
                 
 
-                    //$_actividad->hora_inicio            =    filter_var(trim($_POST['duracion']), FILTER_SANITIZE_NUMBER_INT);                    
-                   // $_actividad->hora_fin                 =    filter_var(trim($_POST['duracion']), FILTER_SANITIZE_NUMBER_INT);
+                    $_actividad->hora_inicio            =  filter_var(trim($_POST['hora_inicio']), FILTER_SANITIZE_NUMBER_INT);                    
+                    $_actividad->hora_fin               =  filter_var(trim($_POST['hora_fin']), FILTER_SANITIZE_NUMBER_INT);
     
                     $_actividad->voluntario          =   filter_var(trim($_POST['id_user']), FILTER_SANITIZE_NUMBER_INT);
                    // $_actividad->grupo          =   filter_var($_POST['surname_1'], FILTER_SANITIZE_STRING);

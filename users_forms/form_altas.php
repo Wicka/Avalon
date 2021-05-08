@@ -161,8 +161,12 @@
                                <option value="3">T. Extranjeria</option>
                           </select>
                          <input  class="form_documento"  type="text" name="num_doc" id="num_doc" placeholder="Escribe tu numero idenficacion"  required  onblur="rellena_doc();">
-                         <div class="div_form_error" id="message_num_doc"></div> <hr>
-                   </div>
+                         <div class="div_form_error" id="message_num_doc"></div> 
+                   </div><hr>
+
+                   <span style="color:red">*</span>   Telefono <br>
+                    <input  class="form_texto"  type="text" name="telefono" id="telefono" placeholder="Escribe tu telefono"  required  onblur="rellena_telefono();">
+                    <div class="div_form_error" id="message_telefono"></div>
 
 
                     <span style="color:red">*</span>   NOMBRE <br>

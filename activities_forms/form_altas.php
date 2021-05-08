@@ -130,15 +130,22 @@
                          ?>
                     </div>
 
-					<div class ="div_alta">
-					<span style="color:red">*</span> Fecha Inicio <br>
+								<div class ="div_alta">
+								<span style="color:red">*</span> Fecha Inicio <br>
       							<input  class="form_texto"  type="date" name="fecha_inicio" id="fecha_inicio"   required onblur="rellena_fecha_inicio();">
       							<div class="div_form_error" id="message_fecha_inicio"></div>
+
+
+								<input  class="form_texto"  type="time" name="hora_inicio" id="hora_inicio"   required onblur="rellena_hora_inicio();">
+      							<div class="div_form_error" id="message_hora_inicio"></div>
 
 
 		                		<span style="color:red">*</span> Fecha Fin <br>
       	         	  			<input  class="form_texto"  type="date" name="fecha_fin" id="fecha_fin"  required  onblur="rellena_fecha_fin();">
       					    	<div class="div_form_error" id="message_fecha_fin"></div>
+
+								<input  class="form_texto"  type="time" name="hora_fin" id="hora_fin"   required onblur="rellena_hora_fin();">
+      							<div class="div_form_error" id="message_hora_fin"></div>
 
       							<span style="color:red">*</span> Duracion  <br>
       							<input  class="form_number"  type="number" name="duracion" id="duracion" min =1 max =24  required  onblur="rellena_duracion();">

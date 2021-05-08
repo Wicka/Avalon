@@ -25,6 +25,13 @@
 
               public $poblacion;
               public $direccion;
+
+              public $num_participante;     
+              public $llena;               
+       
+
+
+
           
 
               
@@ -72,9 +79,12 @@
                       $this->voluntario         = $fila['id_voluntario'];
 
                       $this->grupo              = $fila['id_grupo'];
-                      $this->poblacion           = $fila['id_poblacion'];
-                      $this->direccion          = $fila['direccion'];                
+                      $this->poblacion          = $fila['id_poblacion'];
+                      $this->direccion          = $fila['direccion'];     
                       
+                      $this->num_participante   = $fila['num_participante'];                      
+
+                      $this->llena              = $fila['llena'];  
                     }
           
                 }
@@ -90,6 +100,16 @@
           }
 
 
+            function delete_user_actividad($_iduser){
+              $conn=Connect_BBDD();
+
+              $Query="DELETE FROM `apuntados_actividad` WHERE id_user = '$_iduser' AND id_actividad = '$this->id' ";
+              
+              $registre = $conn->query($Query);
+              $conn->close();     
+              echo "Ha sido dado de Baja"; 
+
+            }
 
 
           function get_all_activities(){
@@ -265,7 +285,8 @@
 
                 `id_poblacion`,
                 `direccion`,
-                `id_grupo`
+                `id_grupo`,
+                `llena`
                 )
       
                   VALUES
@@ -285,7 +306,9 @@
 
                     '$this->poblacion ',
                     '$this->direccion',
-                    '$this->grupo');";
+                    '$this->grupo',
+                    '0'
+                    );";
 
 
 
@@ -307,6 +330,84 @@
 
 
 
+          function get_num_plazas(){
+
+                $conn=Connect_BBDD();
+                $Query = "SELECT count(*) AS plazas FROM `apuntados_actividad` WHERE `id_actividad`= '$this->id' ";
+                       
+                $res_QUERY = $conn->query($Query);
+
+                if($res_QUERY->num_rows > 0){
+  
+                  $plazas = $res_QUERY->fetch_assoc();
+        
+              }
+
+              
+                $conn->close();
+
+                return   $plazas ;
+
+          }
+
+
+
+          function verificar_si_esta_apuntado($id_user){
+
+                $conn=Connect_BBDD();
+
+                $QUERY ="SELECT * FROM `apuntados_actividad` WHERE `id_user`= '$id_user' AND `id_actividad` = '$this->id' ";
+
+                $res_QUERY = $conn->query($QUERY);
+
+                if($res_QUERY->num_rows > 0){
+      
+                    return true;
+        
+                }else{
+                  //NO APUNTADO
+                    return false;
+                }
+
+                $conn->close();
+
+          }
+
+          function apuntarse_actividad($id_user){
+
+            $apuntado = $this->verificar_si_esta_apuntado($id_user);
+                  
+              if (!$apuntado){
+
+                    $conn=Connect_BBDD();
+
+
+                    $SQL_insert= "INSERT INTO `apuntados_actividad`
+                    (`grupo`,
+                    `id_actividad`,
+                    `id_user`
+                    )
+          
+                      VALUES
+                      ('1',
+                        '$this->id',                  
+                        '$id_user'                 
+                        );";
+                        
+                    $res_Insert_QUERY = $conn->query($SQL_insert);
+
+                    $conn->close();
+                    return true;
+                    
+              }else{
+                    return false;
+              }
+
+        }
+
+
+
+     
      /*   
 
 

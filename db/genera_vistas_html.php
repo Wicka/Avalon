@@ -85,8 +85,6 @@
 
               }
           }
-
-
 /*
 
           echo "formulario actividades : <hr>";
@@ -98,5 +96,26 @@
 
            return $_items;
 
+      }
+
+
+      function crea_lista_actividades_apuntadas($_actividades){
+
+        $_items="";
+        foreach ($_actividades as $Key => $value){
+
+
+            $_items=$_items.
+            "<div class='div_actividades_usuario'>"
+              .$value['name']."<hr>"
+              .$value['direccion']."<br>"
+              .$value['fecha_inicio']."<hr>
+              Participantes : ".$value['num_participante']."<hr>"
+              .$value['descripcion']."<br><hr>                 
+              <a href='../actividades/baja.php?id=$value[id]'> Darse de Baja </a>
+              </div>";
+        }
+          
+          return $_items;
       }
 ?>

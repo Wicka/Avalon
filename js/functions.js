@@ -410,6 +410,18 @@ function rellena_fecha_inicio(){
 
 }
 
+function rellena_hora_inicio(){
+
+	var nombre = document.getElementById("hora_inicio").value;
+	if (nombre == "") {
+			document.getElementById("message_hora_inicio").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_hora_inicio").innerHTML = "";
+				return true;
+		}
+
+}
+
 function rellena_fecha_fin(){
 
 	var nombre = document.getElementById("fecha_fin").value;
@@ -417,6 +429,18 @@ function rellena_fecha_fin(){
 			document.getElementById("message_fecha_fin").innerHTML = "Campo obligatorio";
 		}else{
 				document.getElementById("message_fecha_fin").innerHTML = "";
+				return true;
+		}
+
+}
+
+function rellena_hora_fin(){
+
+	var nombre = document.getElementById("hora_fin").value;
+	if (nombre == "") {
+			document.getElementById("message_hora_fin").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_hora_fin").innerHTML = "";
 				return true;
 		}
 
@@ -450,10 +474,24 @@ function rellena_num_participantes(){
 }
 
 
+function rellena_telefono(){
+
+	var nombre = document.getElementById("telefono").value;
+	if (nombre == "") {
+			document.getElementById("message_telefono").innerHTML = "Campo obligatorio";
+		}else{
+				document.getElementById("message_telefono").innerHTML = "";
+				return true;
+		}
+
+}
+
+
+
 
 
 function valida_form_actividades(){
-	if (rellena_nombre_actividad()&& rellena_descripcion_actividad() && rellena_direccion_actividad() && rellena_fecha_fin() && rellena_fecha_inicio() && rellena_duracion() && rellena_num_participantes()){
+	if (rellena_nombre_actividad()&& rellena_descripcion_actividad() && rellena_direccion_actividad() && rellena_fecha_fin() && rellena_fecha_inicio() && rellena_duracion() && rellena_num_participantes() && rellena_telefono() && rellena_hora_inicio() && rellena_hora_fin()){
 		//	AMBOS CAMPOS RELLENADOS SIN ERRORES
 		if (document.getElementById("politica").checked){
 			return true;
