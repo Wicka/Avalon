@@ -68,7 +68,7 @@
 
       </header>
 
-      <form onsubmit="return valida_form();" class="login" action="../crud_users/editar.php" method="POST" enctype='multipart/form-data'>
+      <form class="login" action= "../crud_activities/editar.php" method="POST" >
 
 
 				    <section class ="contenedor">
@@ -80,14 +80,21 @@
                         <h1><?php echo strtoupper($_actividad->name);?></h1><hr>
                       <!--  <span style="color:red"> * Campos Obligatorios </span>-->
                         <hr>
+                        Nombre <br>
+      								
+                      <input  class="form_texto"  type="text" name="name" id="name" placeholder="name"  required
+                       value='<?php echo $_actividad->name;?>'>      										
+                       <br>
                   
                 </div>
 
       						<div id="div_alta" class="division_vertical">
 
-
+                            <input  class="form_texto"  type="hidden" name="id_actividad" id="id_actividad" 
+                             value='<?php echo $_actividad->id;?>'>      										
+               
       			               	Descripcion <br>
-      											<input  class="form_texto"  type="email" name="descripcion" id="descripcion" placeholder="descripcion"  required
+      											<input  class="form_texto"  type="text" name="descripcion" id="descripcion" placeholder="descripcion"  required
                              value='<?php echo $_actividad->descripcion;?>'>      										
                             <br>
 
@@ -97,9 +104,16 @@
                             <br>
       			              
       			               	Fecha Inicio <br>
-      			                <input  class="form_date"  type="date" name="birth" id="birth" placeholder="birth"  required
+      			                <input  class="form_date"  type="date" name="fecha_inicio" id="fecha_inicio" placeholder="fecha_inicio"  required
                             value='<?php echo $_actividad->fecha_inicio;?>'>
 
+
+
+                             Participantes <br>
+                            <input  class="form_texto"  type="number" name="num_participantes" id="num_participantes"  min=1 required 
+                            value='<?php echo $_actividad->num_participante;?>'>
+                         
+                                        
 
       			          
       											<hr>

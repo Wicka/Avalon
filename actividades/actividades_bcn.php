@@ -35,7 +35,13 @@ session_start();
 							<ul class="nav">
 							<li> <a href="../index.php">Inicio</a> </li>                
 							<li> <a href="../sesiones/destroy_session.php"> Logout</a></li>
-							<li> <a href="../activities_forms/form_altas.php"> Nueva</a></li>
+
+							<?php
+								if ($_SESSION['tipo_user']==2){
+									echo 	'<li> <a href="../activities_forms/form_altas.php"> Nueva</a></li>';
+								}
+							?>
+						
 
 							</ul>
 						</div>

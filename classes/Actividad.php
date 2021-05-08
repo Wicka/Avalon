@@ -187,30 +187,33 @@
 
           function update_actividad_table(){
 
-            echo "dentro de update actividad : <hr>";
+            echo "dentro de actividad : <hr>";
             echo "<pre>";
             print_r($this);
             echo "</pre>";
 
 
+
                   $conn=Connect_BBDD();
                  //QUERY ALTA POR DEFECTO STATUS 1 ACTIVO
-                 $_sql_Update="UPDATE `actividad`
-                 SET
 
 
-                 email='$this->email',
+                 $_sql_Update=" UPDATE `actividades` SET
+                 
                  name='$this->name',
-                 surname_01='$this->surname_01',
-                 surname_02='$this->surname_02',
-                 birth_date='$this->birth'
-
-
-                 WHERE  alias= '$this->alias';";
+                 descripcion='$this->descripcion',
+                 direccion='$this->direccion',
+                 fecha_inicio='$this->fecha_inicio',
+                 num_participante='$this->num_participantes'
+                 WHERE  id = '$this->id';";
 
 
                 //EJECUTO LA QUERY INSERTAR NUEVO USUARIO
                 $res_QUERY = $conn->query($_sql_Update);
+
+                echo "<pre>";
+                print_r($res_QUERY);
+                echo "</pre>";
 
                 $conn->close();
             
