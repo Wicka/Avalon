@@ -1,4 +1,3 @@
-
 //VERIFICACION DE QUE LOS CAMPOS ESTAN RELLENADOS Y CON LOS PARAMETROS QUE QUIERO
 
 	//************************LOGIN*****************/

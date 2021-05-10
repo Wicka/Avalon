@@ -1,5 +1,4 @@
 <?php
-
     session_start();  
     include ("../classes/Usuario.php");
 
@@ -39,8 +38,7 @@
     }
  ?>
 
-
- ﻿<doctype html>
+<doctype html>
  <html lang="es">
 
  		<head>

@@ -1,5 +1,4 @@
 <?php
-
     include ("../db/conexio_bbdd.php");
     //CONEXION BBDDD
      
@@ -27,7 +26,8 @@
               public $direccion;
 
               public $num_participante;     
-              public $llena;               
+              public $llena;       
+              public $id_estado;           
        
 
 
@@ -85,6 +85,7 @@
                       $this->num_participante   = $fila['num_participante'];                      
 
                       $this->llena              = $fila['llena'];  
+                      $this->id_estado          = $fila['id_estado'];  
                     }
           
                 }
@@ -289,7 +290,9 @@
                 `id_poblacion`,
                 `direccion`,
                 `id_grupo`,
-                `llena`
+                `llena`,
+                `id_estado`
+                
                 )
       
                   VALUES
@@ -311,6 +314,7 @@
                     '$this->direccion',
                     '$this->grupo',
                     '0'
+                    '1'
                     );";
 
 

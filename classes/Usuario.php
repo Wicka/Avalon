@@ -1,5 +1,4 @@
 <?php
-
     include ("../db/conexio_bbdd.php");
     //CONEXION BBDDD
         
@@ -36,6 +35,8 @@
               //CONSTRUCTOR
              
              function __construct($_alias ){
+
+              echo "dentro de clase Usuario";
                   $this->alias = $_alias;              
                   
                   $conn=Connect_BBDD();

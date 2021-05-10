@@ -1,6 +1,4 @@
 <?php
-
-
         $fp = fopen("../csv/equipaments.csv", "r");
         $_parques_csv = [];
 

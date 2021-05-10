@@ -1,10 +1,6 @@
-<?php   session_start();
-
-  //include ("../db/conexio_bbdd.php");
-  //include ("../db/get_datas.php");
-  //include ("funciones_seguridad.php");
+<?php   
+  session_start();
   include ("../classes/Usuario.php");
-
 
   if(isset($_SESSION['alias_user'])){
           //$conn  = Connect_BBDD();

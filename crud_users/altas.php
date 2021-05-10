@@ -2,10 +2,6 @@
     include ("../sesiones/sesiones.php");
     include ("../classes/Usuario.php");
 
-  //  include ("../verificaciones/funciones_seguridad.php");
-
-
-
     if($_POST!=null){
 
         if($_POST['tipo_usuario']!=null and $_POST['alias']!=null and $_POST['pwd']!=null and $_POST['name']!=null and $_POST['surname_1']!=null and $_POST['birth']!=null and $_POST['email']!=null){
@@ -49,13 +45,7 @@
 
                     $_user->pwd                 =   filter_var($_POST["pwd"], FILTER_SANITIZE_STRING);
 
-                  //  $_user->codifica_PWD($_password );
-                 
-
-                   // echo "paswoed codificado ".$_user->pwd;
-                  // $_pwd_codificada            =   codifica_PWD($_pwd);
-
-                    //$_user->pwd                 =   $_pwd_codificada;
+              
                 
                     $_user->id_tipo_documento   =   filter_var(trim($_POST['documento']), FILTER_SANITIZE_NUMBER_INT);
                     $_user->num_documento       =   filter_var(trim($_POST['num_doc']), FILTER_SANITIZE_STRING);       

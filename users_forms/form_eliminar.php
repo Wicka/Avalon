@@ -1,6 +1,6 @@
-<?php   session_start();
+<?php   
+  session_start();
   include ("../classes/Usuario.php");
-
 
   if(isset($_SESSION['alias_user'])){
      

@@ -1,7 +1,6 @@
 <?php
     session_start();
-    include ("../classes/Actividad.php");
-  
+    include ("../classes/Actividad.php");  
 
     if($_POST!=null){
 

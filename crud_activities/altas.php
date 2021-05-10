@@ -1,11 +1,7 @@
 <?php
     session_start();
-
     include ("../sesiones/sesiones.php");
     include ("../classes/Actividad.php");
-  
-
-  //  include ("../verificaciones/funciones_seguridad.php");
     
 
     if(isset($_SESSION['alias_user'])){

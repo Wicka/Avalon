@@ -5,8 +5,6 @@ session_start();
 
 
 
-
-
 if (isset($_GET['id'])==null){ 
 
 }else{
@@ -19,7 +17,7 @@ if (isset($_GET['id'])==null){
 
 ?>
 
-﻿<doctype html>
+<doctype html>
 <html lang="es">
 
 		<head>

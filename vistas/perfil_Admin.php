@@ -1,10 +1,8 @@
-<?php
-    
+<?php    
     session_start();    
     include ("../classes/Usuario.php");
-    include ("../db/genera_vistas_html.php");
- 
-
+    include ("../db/genera_vistas_html.php"); 
+    
     if(isset($_SESSION['alias_user'])){
 
         $_user = new Usuario($_SESSION['alias_user']);
@@ -29,7 +27,7 @@
  ?>
 
 
- ﻿<doctype html>
+<doctype html>
  <html lang="es">
 
  		<head>
@@ -156,6 +154,21 @@
                             if(isset($_POST['actividades'])){
 
                                 echo "<hr>MOSTRAR TABLA ACTIVIDADES<hr>"; 
+                                $_user_actividades = new Usuario("");
+
+                                if(isset($_POST['act_abiertas'])){
+                                
+                               //   $_user_actividades->id_estado=1;
+
+                                }
+
+                                if(isset($_POST['act_bajas'])){
+                                 
+                                //  $_user_actividades->id_estado=2;
+
+                                }
+                                
+
                             }else{
                                     $arry_users=[];
                                     $_user_registro = new Usuario("");

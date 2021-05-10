@@ -1,7 +1,5 @@
-<?php   session_start();
-
-  //include ("../db/conexio_bbdd.php");
-  //include ("../db/get_datas.php");
+<?php   
+  session_start();
   include ("../classes/Usuario.php");
 
 

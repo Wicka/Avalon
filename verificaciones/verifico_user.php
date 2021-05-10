@@ -1,12 +1,7 @@
-<?php
-     
+<?php     
       include ("../sesiones/sesiones.php");   
       include ("../classes/Usuario.php");
-
-      //include ("../verificaciones/funciones_seguridad.php");
-
-
-
+      
       verifica_Login();
 
       function verifica_Login(){         
@@ -33,10 +28,10 @@
 
               $_user = new Usuario($_alias);
 
-          /*    echo "OBJETO USUARIO ";
+              echo "OBJETO USUARIO ";
               echo "<pre>";
               print_r($_user );
-              echo "</pre>";*/
+              echo "</pre>";
              
               if($_user->id==-1){
                     echo "<hr>No hay usuario con este nombre<hr>";

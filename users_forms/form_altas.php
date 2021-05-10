@@ -1,10 +1,8 @@
 <?php
-
+  session_start();
   include ("../db/get_datas_aux.php");
   include ("../db/genera_vistas_html.php");
-
-  session_start();
-
+ 
 
 	if(isset($_SESSION['alias_user'])){
 		header("Location: ../vistas/perfil_usuario.php");
@@ -13,7 +11,7 @@
 
 ?>
 
-﻿<doctype html>
+<doctype html>
 <html lang="es">
 
 		<head>

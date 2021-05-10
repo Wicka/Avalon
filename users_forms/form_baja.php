@@ -1,26 +1,21 @@
-<?php   session_start();
-
-  //include ("../db/conexio_bbdd.php");
-  //include ("../db/get_datas.php");
+<?php   
+  session_start();
   include ("../classes/Usuario.php");
 
 
   if(isset($_SESSION['alias_user'])){
      
-          $_user = new Usuario($_SESSION['alias_user']);
-
-    
+          $_user = new Usuario($_SESSION['alias_user']);    
 
       }else{
           header("Location: ../sesiones/destroy_session.php");
           die();
         }
 
-
 ?>
 
 
-﻿<doctype html>
+<doctype html>
 <html lang="es">
 
 		<head>

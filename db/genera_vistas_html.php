@@ -1,6 +1,4 @@
 <?php
- 
-
       function crea_lista_html($_array){
         $_lista="";
 

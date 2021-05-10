@@ -1,12 +1,12 @@
 <?php
+		session_start();
 		include ("../classes/Actividad.php");
 		include ("../db/genera_vistas_html.php");
-		session_start();
 ?>
 
 
 
-﻿<doctype html>
+<doctype html>
 <html lang="es">
 
 		<head>

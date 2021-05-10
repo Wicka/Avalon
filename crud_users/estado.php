@@ -1,6 +1,5 @@
 <?php
    session_start(); 
-
     include ("../classes/Usuario.php");
 
 
@@ -19,9 +18,6 @@
             header("Location: ../index.php");
             die();
         }
-
-  
-      
 
 
 ?>

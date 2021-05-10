@@ -4,7 +4,7 @@ include ("../db/genera_vistas_html.php");
 session_start();
 ?>
 
-﻿<doctype html>
+<doctype html>
 <html lang="es">
 
 		<head>

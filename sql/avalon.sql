@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2021 a las 16:51:19
+-- Tiempo de generación: 10-05-2021 a las 10:30:56
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.4.15
 
@@ -36,22 +36,27 @@ CREATE TABLE `actividades` (
   `num_participante` int(11) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
-  `hora_inicio` datetime NOT NULL,
-  `hora_fin` datetime NOT NULL,
+  `hora_inicio` time NOT NULL,
+  `hora_fin` time NOT NULL,
   `duracion` int(11) NOT NULL,
   `id_voluntario` int(11) UNSIGNED NOT NULL,
   `id_poblacion` int(11) UNSIGNED NOT NULL,
   `direccion` varchar(100) NOT NULL,
-  `id_grupo` int(11) UNSIGNED NOT NULL
+  `id_grupo` int(11) UNSIGNED NOT NULL,
+  `llena` int(1) NOT NULL,
+  `id_estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `actividades`
 --
 
-INSERT INTO `actividades` (`id`, `id_ambito`, `adaptada`, `name`, `descripcion`, `num_participante`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `hora_fin`, `duracion`, `id_voluntario`, `id_poblacion`, `direccion`, `id_grupo`) VALUES
-(1, 1, 1, 'Salida campo', 'Salida al campo a catalogar flores', 10, '2021-05-31', '2021-06-08', '2021-05-07 11:34:05', '2021-05-07 11:34:05', 2, 112, 1, 'Montjuic', 1),
-(2, 5, 1, 'Declaracion IRPF', 'Ayuda realizar declaracion IRPF', 1, '2021-05-21', '2021-05-29', '2021-05-07 12:31:41', '2021-05-07 12:31:41', 1, 111, 2, 'Letamendi', 1);
+INSERT INTO `actividades` (`id`, `id_ambito`, `adaptada`, `name`, `descripcion`, `num_participante`, `fecha_inicio`, `fecha_fin`, `hora_inicio`, `hora_fin`, `duracion`, `id_voluntario`, `id_poblacion`, `direccion`, `id_grupo`, `llena`, `id_estado`) VALUES
+(122, 1, 0, 'Salir a buscar Flores', 'Buscar y catalogar distintas plantas de Montjuic', 10, '2021-05-10', '2021-05-10', '12:00:00', '18:00:00', 6, 124, 1, 'Plaça Espanya', 0, 0, 1),
+(123, 1, 1, 'Declaracion IRPF', 'Ayuda en la campaña del IRPF 2020', 1, '2021-05-10', '2021-05-10', '17:00:00', '19:00:00', 3, 124, 1, 'Biblioteca Pere Candels', 0, 0, 1),
+(124, 7, 1, 'Visita medica', 'Acompañar a la campaña vacunacion', 27, '2000-11-14', '2021-05-15', '00:18:26', '00:17:26', 13, 121, 1, 'Fira Barcelona l&#39;Hospitalet', 0, 0, 1),
+(125, 3, 1, 'Pelicula Estreno', 'Ir al cine a ver una pelicula', 15, '2021-05-09', '2021-05-09', '00:16:00', '00:19:00', 3, 122, 1, 'Cines Icaria', 0, 0, 1),
+(126, 2, 1, 'Descubrir Historia Ciudad', 'ruta por la zona románica de la ciudad, visita guiada', 12, '2021-06-11', '2021-06-11', '00:11:00', '00:18:00', 3, 126, 1, 'Plaça Catalunya', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -65,6 +70,18 @@ CREATE TABLE `apuntados_actividad` (
   `id_actividad` int(11) UNSIGNED NOT NULL,
   `id_user` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `apuntados_actividad`
+--
+
+INSERT INTO `apuntados_actividad` (`id`, `grupo`, `id_actividad`, `id_user`) VALUES
+(1, 1, 122, 117),
+(2, 1, 122, 120),
+(5, 1, 124, 116),
+(8, 1, 125, 116),
+(9, 1, 122, 116),
+(13, 1, 125, 125);
 
 -- --------------------------------------------------------
 
@@ -203,14 +220,14 @@ INSERT INTO `aux_nivel_estudios` (`id`, `descripcion`) VALUES
 CREATE TABLE `aux_poblacion` (
   `id` int(11) UNSIGNED NOT NULL,
   `cp` varchar(5) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `descripcion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `aux_poblacion`
 --
 
-INSERT INTO `aux_poblacion` (`id`, `cp`, `nombre`) VALUES
+INSERT INTO `aux_poblacion` (`id`, `cp`, `descripcion`) VALUES
 (1, '08038', 'Barcelona'),
 (2, '08221', 'Terrassa'),
 (3, '08904', 'L\'Hospitalet de Llobregat'),
@@ -291,12 +308,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `id_tipo`, `id_estado`, `id_disponibilidad`, `alias`, `email`, `telefono`, `pwd`, `create_date`, `last_connection`, `id_tipo_documento`, `num_documento`, `name`, `surname_01`, `surname_02`, `birth_date`, `id_titulacion`, `sector_estudios`) VALUES
-(107, 3, 3, '0000', 'junio', 'f@f.es', 678963254, '$2y$10$DAeUj31u.WuNlloWt/1CI.93Tv3E.7WHLGt1zal6gU58EKm0c5TyS ', '2021-05-02', '2021-05-04', 1, 'dfsd ', 'Junio', 'Mesecito', ' ', '2000-11-11', 1, 1),
-(110, 1, 1, '0000', 'ago', 'admin@a.es', 935682413, '$2y$10$LRmRGtD9L.JkR8bLcLZYqueZe3tKphG4Eeg17b9O/drcQzH5JFMuq', '2021-05-02', '2021-05-07', 1, 'ee ', 'Agosto', 'Admin', ' Pepe', '2000-11-11', 1, 1),
-(111, 2, 3, '0000', 'lunes', 'l@m.es', 912546985, '$2y$10$qbNRKpzBs7Zxdx4R5sns2e5MZ94w9sr768CQ4DKbZ80gypYeJ2.Jq ', '2021-05-02', '2021-05-06', 1, 'fdf ', 'Lunero', 'Cascabelero', ' ', '2000-11-11', 1, 1),
-(112, 3, 1, '1100', 'martes', 'martes@martes.es ', 935264782, '$2y$10$PipX7MLKUK60pykN.Ypn.uOH/XTpqiMuZcm8V9ZqSCK8Sl/aqe81. ', '2021-05-05', '2021-05-06', 1, '112354657S ', 'Martes', 'Semanal ', 'Ruiz ', '1978-10-11', 5, 1),
-(113, 3, 1, '0111', 'enero', 'enero@enero.es ', 972568952, '$2y$10$NM8aDBpMd3q7CkfQaEXaJujv2Goe8uwmC3zn/yg7IpbMpcXThqgc. ', '2021-05-05', '2021-05-05', 1, '22333556T ', 'Enero', 'Mes ', ' ', '2000-10-11', 5, 1),
-(114, 2, 1, '0000', 'dici', 'dic@dic.es ', 95255843, '$2y$10$YYUbkJ7CZircfnyjdh3JoOyW6/Vg157.AjncqFQH6A3LQDu/w/KWC ', '2021-05-06', '2021-05-07', 1, '1212121 ', 'Wuc', 'Qac ', ' ', '2000-11-11', 8, 4);
+(116, 3, 1, '1100', 'lunes', 'lunes@lunes.com ', 931112235, '$2y$10$6OXNjo9wWze61HRX.pwehOd1HVc2mJBCGvHB4xYZZ7JATYfeuq.yW ', '2021-05-08', '2021-05-10', 1, '11111111A ', 'Maria', 'Paredes ', 'Ruiz ', '2000-11-11', 7, 2),
+(117, 3, 1, '0011', 'martes', 'martes@martes.com ', 612335444, '$2y$10$eiM9U9f58vfIRf0KKRBrZ.kyQ3WuUinCWw5kFQP4gkGrlciypTeyW ', '2021-05-08', '2021-05-08', 1, '22222222B ', 'Montse', 'Moreno ', 'Mesa ', '1986-02-11', 12, 1),
+(118, 1, 1, '0000', 'admin', 'admin@admin.es ', 952554444, '$2y$10$Dna6Wlgpp3JEiQck1lvkA.1KcaDH1zBw9cUDG9Lo5NGTOwp82pQSm ', '2021-05-08', '2021-05-10', 1, '22233366V ', 'Administrador', 'Aplicacion ', 'The boss ', '2001-11-11', 12, 1),
+(119, 3, 1, '0000', 'miercoles', 'miercoles@miercoles.es ', 935568899, '$2y$10$KH5T5K48A1JZQWmQKovPnuQ1LTJ4HEM5xvUdY0OuNOVXjpikRGQxq ', '2021-05-08', '2021-05-08', 1, '22233555P ', 'MIercoles', 'Romero ', 'Garcia ', '2000-11-11', 1, 1),
+(120, 3, 1, '0011', 'jueves', 'jueves@jueves.es ', 611445789, '$2y$10$ZmLe7CwYWI77jtKcMfIAIeTe2yOP2hS4Roxv.QJ2D1TG.SRZbwCbi ', '2021-05-08', '2021-05-08', 1, '33333652F ', 'Julia', 'Garcia ', 'Roc ', '1980-11-11', 8, 1),
+(121, 2, 1, '1100', 'enero', 'enero@enero.es ', 655999333, '$2y$10$rfQji3CjTeo/a8sy5ef6Kez.ddKJ4urbbLSJGDWcrpjKhho.SyBby ', '2021-05-08', '2021-05-10', 1, '99666555D ', 'Fernando', 'Abril ', 'Albiach ', '1974-11-11', 9, 3),
+(122, 2, 1, '1011', 'febrero', 'febrero@febrero.es ', 695222333, '$2y$10$fZk5IGSlAlQbCPdcvWq.W.V6A1rLE1NRkSj1CHHErgVoCp/MNwGBK ', '2021-05-08', '2021-05-08', 1, '88999888D ', 'Isabel', 'Riera ', 'Marquez ', '2000-11-11', 8, 1),
+(123, 2, 1, '0100', 'marzo', 'marzo@marzo.es ', 978886592, '$2y$10$ikcbzMQj.iRCaG/AW9ucnu84tHoCjqM7QxmCBL.NsnoR1HbRJ64oO ', '2021-05-08', '2021-05-08', 1, '22333000D ', 'Pepe', 'Luis ', 'Romero ', '2000-11-11', 9, 1),
+(124, 2, 1, '0100', 'abril', 'abril@abril.com ', 95223336, '$2y$10$nUXb5xBdOvp2AphGLxpgre1SnzPbz4LOgZ/KMfFfxZvIN4/3Rzu.u ', '2021-05-08', '2021-05-08', 1, '88999555U ', 'Lara', 'Martinez ', 'Pujol ', '2000-11-11', 7, 1),
+(125, 3, 1, '0000', 'viernes', 'viernes@viernes.es ', 962354785, '$2y$10$lMlpjVvwbWok9cr.seoSU.nfnbvnrVJWTb9gyWr02Zs6kPtv4SUBe ', '2021-05-10', '2021-05-10', 1, '99966652F ', 'Viernes', 'Semanal ', 'Peres ', '2000-11-11', 4, 2),
+(126, 2, 1, '0110', 'mayo', 'mayo@mayo.es ', 655222889, '$2y$10$CSA2qazY/vbmyy8tSQWyH.CjgmTB6xCQyVT1u37N62d9DI0cuFIvO ', '2021-05-10', '2021-05-10', 1, '7788882112f ', 'Maya', 'Gomez ', 'Otero ', '1974-11-11', 8, 3);
 
 --
 -- Índices para tablas volcadas
@@ -393,13 +415,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- AUTO_INCREMENT de la tabla `apuntados_actividad`
 --
 ALTER TABLE `apuntados_actividad`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `aux_ambito`
@@ -447,7 +469,7 @@ ALTER TABLE `aux_tipo_usuarios`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
 
 --
 -- Restricciones para tablas volcadas

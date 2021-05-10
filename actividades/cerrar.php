@@ -4,9 +4,6 @@ include ("../db/genera_vistas_html.php");
 session_start();
 
 
-
-
-
 if (isset($_GET['id'])==null){ 
 
 }else{
@@ -19,7 +16,7 @@ if (isset($_GET['id'])==null){
 
 ?>
 
-﻿<doctype html>
+<doctype html>
 <html lang="es">
 
 		<head>
@@ -92,10 +89,11 @@ if (isset($_GET['id'])==null){
                                        <input type='hidden' name='id_usuario' id='id_usuario' value =' $id_user'>
                                        <label for ='motivo'> Indica el motivo del Cierre de la Actividad</label><br><hr>
                                        <select id='motivo' name='motivo'>
-                                           <option value='1'>Ausencia personas</option>
-                                           <option value='2'>Baja del Voluntario</option>
-                                           <option value='3'>Cancelacion evento</option>
-                                           <option value='4'>Causa Externa</option>
+                                           <option value='1'>Fin - Realizada</option>
+										   <option value='2'>Ausencia personas</option>
+                                           <option value='3'>Baja del Voluntario</option>
+                                           <option value='4'>Cancelacion evento</option>
+                                           <option value='5'>Ausencia personas<</option>
                                         </select>       
                                         <br><hr><br>                                     
                                         <input type='submit' value='Cerrar'>
