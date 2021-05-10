@@ -7,16 +7,16 @@
 
 function Connect_BBDD(){
 
-   /*
+   
       $servidor = "localhost";
       $basededades = "avalon";
       $usuari = "avalon";
-      $contrasenya = "avalon";*/
-      
+      $contrasenya = "avalon";
+     /* 
       $servidor = "localhost";
       $basededades = "id16770810_avalon";
       $usuari = "id16770810_oberon";
-      $contrasenya = "QhhSJiv+y82ELm1{";
+      $contrasenya = "QhhSJiv+y82ELm1{";*/
       
       $conn = new mysqli($servidor, $usuari, $contrasenya, $basededades);
 

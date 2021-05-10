@@ -22,7 +22,7 @@
 ?>
 
 
-<doctype html>
+﻿<doctype html>
 <html lang="es">
 
 		<head>
@@ -64,7 +64,7 @@
 
       </header>
 
-      <form onsubmit="return valida_form();" class="login" action="../form_eliminar.php" method="POST" enctype='multipart/form-data'>
+      <form class="login" action="../form_eliminar.php" method="POST" enctype='multipart/form-data'>
 
 
 				    <section class ="contenedor">
@@ -79,10 +79,10 @@
                     
                     <div id="div_option_delete" class="div_radio">
                           
-                          <input type="radio" id="del_voluntarios" name="radio_delete" value=11>
+                          <input type="radio" id="del_voluntarios" name="radio_delete" value=12>
                           <label for="voluntario">Voluntarios</label><br>
 
-                          <input type="radio" id="del_usuarios" name="radio_delete" value=12  checked>
+                          <input type="radio" id="del_usuarios" name="radio_delete" value=13  checked>
                           <label for="usuario">Usuarios</label> <br>
 
                           <input type="radio" id="del_actividades" name="radio_delete" value=21  checked>

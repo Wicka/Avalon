@@ -1,7 +1,6 @@
 <?php     
       include ("../sesiones/sesiones.php");   
       include ("../classes/Usuario.php");
-      
       verifica_Login();
 
       function verifica_Login(){         
@@ -36,8 +35,8 @@
               if($_user->id==-1){
                     echo "<hr>No hay usuario con este nombre<hr>";
                     echo "<hr>TE ENVIO A INDEX NO TE MOSTRARE ESTE MSJ<hr>";
-   //                 header("Location: ..");
-   //                 die();
+                    header("Location: ..");
+                    die();
               }else{
                     $_pwd_hash =  $_user->pwd;
 
@@ -80,39 +79,32 @@
                             setcookie("usuario", $_SESSION["alias_user"]."-".$caducitat ,time()-4000, "/");
                         }
 
-                        //ACTUALIZAR FECHA CONEXION
-                        //$conn = Connect_BBDD();
+                
                         $_user->actualizar_Conexion();
-
-                        //COMPROBAR SI ESTA ACTIVO
-                     //   $conn = Connect_BBDD();
-                       // $_tipo_user = get_id_tipo_by_user($_alias,$conn);
-                      
-                    //    echo "<pre>";
-                    //    print_r( $_tipo_user);
-                   //     echo "</pre>";
-
-                    //    $conn->close();
+                   
 
                         $_SESSION['code_tipo_usuario']=$_user->id_tipo;
 
                         switch ( $_SESSION['code_tipo_usuario']) {
                             case 1:
                                  // usuario Administrador...
-                            header ("Location: ../vistas/perfil_Admin.php");
+                     
                             echo "USUARIO ADMININSTRADOR : ".$_SESSION['code_tipo_usuario']."<hr>";
+                            header ("Location: ../vistas/perfil_Admin.php");
 
                             break;
                             case 2:
                                 // usuario Voluntarior...
-                            header ("Location: ../vistas/perfil_Voluntario.php");
+                          
                             echo "USUARIO ADMININSTRADOR : ".$_SESSION['code_tipo_usuario']."<hr>";
+                            header ("Location: ../vistas/perfil_Voluntario.php");
 
                             break;
                             case 3:
                               //   usuario Usuario...
-                           header ("Location: ../vistas/perfil_Usuario.php");
+                         
                             echo "USUARIO ADMININSTRADOR : ".$_SESSION['code_tipo_usuario']."<hr>";
+                            header ("Location: ../vistas/perfil_Usuario.php");
 
                             break;
                             

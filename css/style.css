@@ -116,7 +116,7 @@ color:white;
  
 }
 
-#eliminar{
+#eliminar, #acti_eliminar{
     background: url("../img/fondo/eliminar.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;

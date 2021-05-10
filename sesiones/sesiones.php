@@ -1,4 +1,5 @@
 <?php
+   session_start();
     function Crear_Usuario_Sesion($_user){
 
           if ($_user->alias == null){
@@ -10,8 +11,6 @@
 
               //INICIO SESSIO
               echo "ESTOY EN CREAR SESION CON EL alias : ".$_user->alias ."<hr>";
-              session_start();
-
               $_SESSION['obj_user']=$_user;
               $_SESSION['alias_user']=$_user->alias ;
               $_SESSION['tipo_user']=$_user->id_tipo;

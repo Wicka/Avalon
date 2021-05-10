@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include ("../sesiones/sesiones.php");
+  //  include ("../sesiones/sesiones.php");
     include ("../classes/Actividad.php");
     
 
@@ -47,7 +47,6 @@
                     $_actividad->hora_fin               =  filter_var(trim($_POST['hora_fin']), FILTER_SANITIZE_NUMBER_INT);
     
                     $_actividad->voluntario          =   filter_var(trim($_POST['id_user']), FILTER_SANITIZE_NUMBER_INT);
-                   // $_actividad->grupo          =   filter_var($_POST['surname_1'], FILTER_SANITIZE_STRING);
                                  
                    
         
@@ -57,21 +56,8 @@
                     echo "</pre>";
                     echo "<hr>";
 
-                $_actividad->create_actividad_table();        
-
-              
-
-               // echo "alias :".$_actividad->id;
-                
-             /*   $_actividad_creado = new Actividad($_actividad->id);
-
-                echo "nuevo user despues de creado para recuperarlo de la tabla";
-                echo "<pre>";
-                print_r($_actividad_creado);
-                echo "</pre>";
-                echo "<hr>";
-
-*/
+                    $_actividad->create_actividad_table();  
+           
                     header("Location: ../actividades/actividades_bcn.php");
 
         }else{

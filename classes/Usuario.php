@@ -36,7 +36,7 @@
              
              function __construct($_alias ){
 
-              echo "dentro de clase Usuario";
+           
                   $this->alias = $_alias;              
                   
                   $conn=Connect_BBDD();
@@ -82,7 +82,6 @@
           ////////////////////////////////////////////////////////////////
 
          function delete_user_table(){
-
             $conn=Connect_BBDD();                                    
             $QUERY_delete = "DELETE FROM `users` WHERE id='$this->id';";
             //EXCUTO LA QUERY I GUARDO A VARIABLE
@@ -98,7 +97,6 @@
           ////////////////////////////////////////////////////////////////
 
           function actualizar_Conexion(){
-
             $conn=Connect_BBDD();
             $_now = getdate();
             $_hoy = $_now['year']."-".$_now['mon']."-".$_now['mday']." ".$_now['hours'].":".$_now['minutes'].":".$_now['seconds'];  
@@ -114,7 +112,6 @@
 
 
             function update_pwd_user(){  
-
                     $conn=Connect_BBDD();
                     $_sql_Update="UPDATE `users`
                     SET
@@ -133,7 +130,6 @@
           ////////////////////////////////////////////////////////////////
 
           function update_user_table(){      
-
                   $conn=Connect_BBDD();
                  //QUERY ALTA POR DEFECTO STATUS 1 ACTIVO
                  $_sql_Update="UPDATE `users`
@@ -158,7 +154,6 @@
           ////////////////////////////////////////////////////////////////
 
           function cambiar_estado_user($_nuevo_estado){
-
                   $conn=Connect_BBDD();
                  //QUERY ALTA POR DEFECTO STATUS 1 ACTIVO
                  $_sql_Update="UPDATE `users`
@@ -178,11 +173,9 @@
 
           function create_user_table(){
 
-              $_hash_pwd = $this->codifica_PWD($this->pwd);
-          
+              $_hash_pwd = $this->codifica_PWD($this->pwd);         
 
                 $conn=Connect_BBDD();
-
                 $SQL_insert= "INSERT INTO `users`
                 (`id_tipo`,
                 `id_estado`,
@@ -230,57 +223,37 @@
 
 
          function get_activities_by_user(){
-
                   $_actividades_id=[];
                   $_actividades=[];
-
                   $conn=Connect_BBDD();           
                   $sql = "SELECT `id_actividad` FROM `apuntados_actividad`  
                           WHERE `id_user`='$this->id' ";
-
                   $_actividades_user = $conn->query($sql);   
-
                   if($_actividades_user->num_rows > 0){  
-
                     while($fila = $_actividades_user->fetch_assoc()) {
-
                       array_push($_actividades_id , $fila);                
                     }    
                 }
-
                
-                for ($i=0; $i < count($_actividades_id); $i++){           
-                  
+                for ($i=0; $i < count($_actividades_id); $i++){  
                    $id_actividadd = $_actividades_id[$i]['id_actividad'];
-
-                   $Query="SELECT * FROM actividades WHERE `id`='$id_actividadd' ";
-               
+                   $Query="SELECT * FROM actividades WHERE `id`='$id_actividadd' ";              
                    
-                    $_QUERY_RES = $conn->query($Query);
-        
+                    $_QUERY_RES = $conn->query($Query);        
                     if($_QUERY_RES->num_rows > 0){
-
                         $fila = $_QUERY_RES->fetch_assoc();        
                         array_push($_actividades , $fila); 
                   }
-
                 }
-
                 $conn->close();
-
-                return $_actividades;
-
-              
+                return $_actividades;              
             }
           
 
 
 
-            function get_activities_by_volunter(){
-
-            
+            function get_activities_by_volunter(){            
               $_actividades=[];
-
               $conn=Connect_BBDD();           
               $sql = "SELECT * FROM `actividades`  
                       WHERE `id_voluntario`='$this->id' ";
@@ -288,40 +261,66 @@
               $_actividades_user = $conn->query($sql);   
 
               if($_actividades_user->num_rows > 0){  
-
                 while($fila = $_actividades_user->fetch_assoc()) {
-
                   array_push($_actividades , $fila);                
                 }    
-            }
-
-                   
+            }                   
             $conn->close();
+            return $_actividades;          
+        }
 
-            return $_actividades;
 
-          
+        function get_all_activities($_estado){      
+             $actividades=[];
+              $conn=Connect_BBDD();                
+              if ($_estado==3){
+                $sql = "SELECT * FROM actividades";
+              }else{
+                  if($_estado==21){ //VIENE DEL FORMULARIO ELIMINAR
+                      $sql = "SELECT * FROM actividades WHERE `id_estado`=3 ";
+                  }else{
+                      $sql = "SELECT * FROM actividades WHERE `id_estado`='$_estado' ";
+                  }              
+              }  
+              $_actividades = $conn->query($sql);  
+            /*  echo "<pre>";
+              print_r($_actividades);
+              echo "</pre>";*/
+
+              if($_actividades->num_rows > 0){                 
+                  while($fila = $_actividades->fetch_assoc()) {
+                    array_push($actividades,$fila);                
+                  }    
+              }
+            /*  
+              echo "<pre>";
+              print_r($actividades);
+              echo "</pre>";
+*/         
+              $conn->close();
+              return $actividades;
+        }
+
+
+
+        function elimina_actividad($_id){
+
+                  $conn=Connect_BBDD();         
+                  $QUERY_delete = "DELETE FROM `actividades` WHERE id='$_id';";
+                  $registre = $conn->query($QUERY_delete);                
+                  $conn->close();               
         }
 
 
         function get_total_horas(){
-
                 $conn=Connect_BBDD();           
                 $sql = "SELECT SUM(`duracion`) AS horas FROM actividades WHERE `id_voluntario`='$this->id' ";
-
-
                 $_horas_actividades_user = $conn->query($sql);   
-
                 if($_horas_actividades_user->num_rows > 0){  
-
                     $_actividades = $_horas_actividades_user->fetch_assoc(); 
                 }
-
-
                 $conn->close();
-
-                return $_actividades;
-              
+                return $_actividades;             
 
         }
 
@@ -331,39 +330,29 @@
 
 
           function get_all_user_by_tipo_and_by_estado(){
-
             $Query="SELECT * FROM users";
-
             if (($this->id_tipo!="") && ($this->id_estado!="")){
               $Query = "SELECT * FROM users WHERE id_tipo = '$this->id_tipo' AND id_estado = '$this->id_estado'";
-
             }else{
-
                   if ($this->id_tipo!=""){
                     $Query = "SELECT * FROM users WHERE id_tipo = '$this->id_tipo'";
                   }
-
                   if ($this->id_estado!=""){
                     $Query = "SELECT * FROM users WHERE id_estado = '$this->id_estado'";
                   }
             }
-
               $_arry_user=[];
               $conn=Connect_BBDD();
-
               if($conn->connect_error){
                 echo "Fallo en la conexion a la BBDD : ".$conn->connect_error;
               //   die();
               }
-
               $_usuario = $conn->query($Query);
-
               if($_usuario->num_rows > 0){  
                 while($fila = $_usuario->fetch_assoc()) {
                   array_push($_arry_user,$fila);                
                 }    
             }
-
             $conn->close();
             return $_arry_user;
         }
@@ -376,22 +365,17 @@
           ////////////////////////////////////////////////////////////////
 
 
-          function codifica_PWD($_pwd){       
-        
-            return password_hash($_pwd,PASSWORD_DEFAULT);
-        
+          function codifica_PWD($_pwd){    
+               return password_hash($_pwd,PASSWORD_DEFAULT);        
           }
 
           
 
                 
           function verifica_Pwd($_pwd){
-
                 echo "pwd que paso ". $_pwd."<hr>";
                 echo "pwd que tiene objeto ". $this->pwd."<hr>";
-
                 $_pwd_hash = trim($this->pwd);
-
                 if (password_verify ($_pwd, $_pwd_hash)) {
                   echo "ok <hr>";
                   $login = true;
@@ -411,7 +395,6 @@
 
 
           function get_descripcion_tipo_usuario(){
-
             $conn=Connect_BBDD();           
             $sql = "SELECT `descripcion` FROM `aux_tipo_usuarios` 
                     WHERE `id`='$this->id_tipo' ";              
@@ -419,7 +402,7 @@
             $_tipo = $tipo_usuario->fetch_assoc();           
             $conn->close();  
             return $_tipo;
-      }
+        }
 
 
   }

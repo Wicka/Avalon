@@ -86,20 +86,15 @@ if (isset($_GET['id'])==null){
                                    
                                     
                                echo    "<form action = '../crud_activities/cerrar.php' method='POST'>
-                                       <input type='hidden' name='id_usuario' id='id_usuario' value =' $id_user'>
+                                       <input type='hidden' name='id_actividad' id='id_actividad' value =' $_actividad->id'>
                                        <label for ='motivo'> Indica el motivo del Cierre de la Actividad</label><br><hr>
-                                       <select id='motivo' name='motivo'>
-                                           <option value='1'>Fin - Realizada</option>
-										   <option value='2'>Ausencia personas</option>
-                                           <option value='3'>Baja del Voluntario</option>
-                                           <option value='4'>Cancelacion evento</option>
-                                           <option value='5'>Ausencia personas<</option>
+                                       <select id='motivo' name='motivo'>                                        
+										   <option value='3'>Error Borrar</option>
+                                           <option value='4'>Cierre evento</option>                      
                                         </select>       
                                         <br><hr><br>                                     
                                         <input type='submit' value='Cerrar'>
-                                        </form>";
-                         
-                                            
+                                        </form>";  
                             
 						?>
 

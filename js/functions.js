@@ -4,23 +4,29 @@
 	//******FUNCIONES USADAS EN INDEX Y EN ALTAS****/
 	//**********************************************/
 function rellena_alias(){
+		console.log("dentro de alias en js");
 
 				var alias = document.getElementById("alias").value;
 				if (alias == "") {
 						document.getElementById("message_nick").innerHTML = "Escribe tu nick!";
+						console.log("alias false en js");
 					}else{
 							document.getElementById("message_nick").innerHTML = "";
+							console.log("alias true en js");
 							return true;
 					}
 }
 
 
 function rellena_login_password(){
+	console.log("dentro de pwd en js");
 		var pwd = document.getElementById("pwd").value;
 		if (pwd == "") {
 				document.getElementById("message_pwd").innerHTML = "Escribe la Contraseña!";
+				console.log("pwd false en js");
 				}else{
 							document.getElementById("message_pwd").innerHTML = "";
+							console.log("alias true en js");
 							return true
 			}
 }
@@ -32,6 +38,7 @@ function valida_login(){
 		return true;
 	}else{
 		//	CAMPOS SIN RELLENAR
+		console.log("false");
 		return false;
 	}
 }

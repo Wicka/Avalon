@@ -29,9 +29,6 @@
               public $llena;       
               public $id_estado;           
        
-
-
-
           
 
               
@@ -119,9 +116,7 @@
                
                 $_arry_actividades=[];
      
-                $conn=Connect_BBDD();
-           
-        
+                $conn=Connect_BBDD();                  
      
                  if($conn->connect_error){
                    echo "Fallo en la conexion a la BBDD : ".$conn->connect_error;
@@ -140,25 +135,10 @@
          
                }
      
-               $conn->close();
-     
-     
+               $conn->close();         
                  return $_arry_actividades;
              }
      
-     
-
-
-
-
-
-
-
-
-
-
-
-          
 
 
           ////////////////////////////////////////////////////////////////
@@ -179,20 +159,16 @@
 
 
 
-
-
             
           ////////////////////////////////////////////////////////////////
           //////////////////** ACTUALIZAR ACTIVIDAD **////////////////
           ////////////////////////////////////////////////////////////////
 
           function update_actividad_table(){
-
             echo "dentro de actividad : <hr>";
             echo "<pre>";
             print_r($this);
             echo "</pre>";
-
 
 
                   $conn=Connect_BBDD();
@@ -205,6 +181,7 @@
                  descripcion='$this->descripcion',
                  direccion='$this->direccion',
                  fecha_inicio='$this->fecha_inicio',
+                 id_estado='$this->id_estado',
                  num_participante='$this->num_participantes'
                  WHERE  id = '$this->id';";
 
@@ -313,7 +290,7 @@
                     '$this->poblacion ',
                     '$this->direccion',
                     '$this->grupo',
-                    '0'
+                    '0',
                     '1'
                     );";
 
@@ -411,140 +388,6 @@
               }
 
         }
-
-
-
-     
-     /*   
-
-
-          function get_all_user_by_tipo_and_by_estado(){
-       //     echo "Tipo usuario : ".$this->id_tipo."<hr>"; 
-      //      echo "Estado usuario : ".$this->id_estado."<hr>";
-      $Query="SELECT * FROM users";
-
-            if (($this->id_tipo!="") && ($this->id_estado!="")){
-              $Query = "SELECT * FROM users WHERE id_tipo = '$this->id_tipo' AND id_estado = '$this->id_estado'";
-
-            }else{
-
-
-              if ($this->id_tipo!=""){
-                $Query = "SELECT * FROM users WHERE id_tipo = '$this->id_tipo'";
-              }
-
-              if ($this->id_estado!=""){
-                $Query = "SELECT * FROM users WHERE id_estado = '$this->id_estado'";
-
-              }
-            }
-
-            $_arry_user=[];
-
-
-      //      echo "query: ".$Query."<hr>";
-            $conn=Connect_BBDD();
-      
-   
-
-            if($conn->connect_error){
-              echo "Fallo en la conexion a la BBDD : ".$conn->connect_error;
-           //   die();
-            }
-
-            $_usuario = $conn->query($Query);
-/*
-            echo "dentro de clase user : <hr>";
-            echo "<pre>";
-            print_r( $_usuario );
-            echo "</pre>";
-   */  
-/*
-            if($_usuario->num_rows > 0){
-  
-              while($fila = $_usuario->fetch_assoc()) {
-
-                array_push($_arry_user,$fila);
-                
-              }
-    
-          }
-
-          $conn->close();
-
-
-     /*     
-          echo "dentro de clase user ARRAY : <hr>";
-          echo "<pre>";
-          print_r(  $_arry_user );
-          echo "</pre>";
-
-*/
-
-/*
-
-
-            return $_arry_user;
-        }
-
-
-
-*/
-
-          ////////////////////////////////////////////////////////////////
-          //////////////////** METODOS CONTROL **/////////////////////////
-          ////////////////////////////////////////////////////////////////
-
-/*
-
-          function codifica_PWD($_pwd){       
-        
-            return password_hash($_pwd,PASSWORD_DEFAULT);
-        
-          }
-
-          
-
-                
-          function verifica_Pwd($_pwd){
-
-                echo "pwd que paso ". $_pwd."<hr>";
-                echo "pwd que tiene objeto ". $this->pwd."<hr>";
-
-                $_pwd_hash = trim($this->pwd);
-
-                if (password_verify ($_pwd, $_pwd_hash)) {
-                  echo "ok <hr>";
-                  $login = true;
-                } else {
-                  $login = false;
-                  echo "error <hr>";
-                }
-              return $login;
-          }
-
-*/
-
-
-          ////////////////////////////////////////////////////////////////
-          //////////////////** TABLAS AUXILIARES **///////////////////////
-          ////////////////////////////////////////////////////////////////
-
-/*
-          function get_descripcion_tipo_usuario(){
-
-            $conn=Connect_BBDD();           
-            $sql = "SELECT `descripcion` FROM `aux_tipo_usuarios` 
-                    WHERE `id`='$this->id_tipo' ";
-              
-            $tipo_usuario = $conn->query($sql);           
-            $_tipo = $tipo_usuario->fetch_assoc();  
-         
-            $conn->close();
-  
-            return $_tipo;
-      }
-*/
 
 
   }

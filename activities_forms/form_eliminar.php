@@ -1,6 +1,7 @@
 <?php   
   session_start();
-  include ("../classes/Usuario.php");
+  include ("../classes/Usuario.php");  
+  include ("../db/genera_vistas_html.php"); 
 
   if(isset($_SESSION['alias_user'])){
      
@@ -22,7 +23,7 @@
 ?>
 
 
-﻿<doctype html>
+<doctype html>
 <html lang="es">
 
 		<head>
@@ -64,7 +65,7 @@
 
       </header>
 
-      <form onsubmit="return valida_form();" class="login" action="../form_eliminar.php" method="POST" enctype='multipart/form-data'>
+      <form action="form_eliminar.php" method="POST" >
 
 
 				    <section class ="contenedor">
@@ -79,10 +80,10 @@
                     
                     <div id="div_option_delete" class="div_radio">
                           
-                          <input type="radio" id="del_voluntarios" name="radio_delete" value=11>
+                          <input type="radio" id="del_voluntarios" name="radio_delete" value=12>
                           <label for="voluntario">Voluntarios</label><br>
 
-                          <input type="radio" id="del_usuarios" name="radio_delete" value=12  checked>
+                          <input type="radio" id="del_usuarios" name="radio_delete" value=13  checked>
                           <label for="usuario">Usuarios</label> <br>
 
                           <input type="radio" id="del_actividades" name="radio_delete" value=21  checked>
@@ -113,39 +114,102 @@
 				      </section>
 
          </form>
+       
          <section  class ="contenedor">
-          <?php
-            echo "RESULTADOR DE POST <HR>";
-            echo "TABLA SEGUN OPCON";
-          ?>
 
-<div> solo los registros que tengan su campo id_esta a borrar por solicitud de usuario
-                     <p>tabla</p>
-                     <table>
-                          <tr>
-                            <th>alias</th>
-                            <th>tipo</th>
-                            <th>estado</th>
-                            <th>email</th>
-                            <th>disponiblidad</th>
-                            <th>sector</th>
-                            <th>name</th>
-                            <th>surname</th>                           
-                            <th>ELIMINAR</th>
+         <?php
+               if( $_POST !=null){
 
-                          </tr>
-                          <td>pepe</td>
-                          <td>pepe</td>
-                          <td>pepe</td>
-                          <td>pepe</td>
-                          <td>pepe</td>
-                          <td>pepe</td>
-                          <td>pepe</td>
-                          <td>pepe</td>
-                          <td>pepe</td>
-                        
-                     </table>
-                </div>
+                 // echo $_POST['radio_delete'];
+                  //12 MOSTRAR VOLUNTARIOS
+                  //13 MOSTRAR USUARIOS
+                  //12 MOSTRAR ACTVIDADES
+
+
+                  $_actividades=[];
+
+                  //    echo "<hr>MOSTRAR TABLA ACTIVIDADES<hr>"; 
+
+                  
+
+                if($_POST['radio_delete']==21){ //ACTIVIDADES
+
+                  $_user_actividades = $_user->get_all_activities($_POST['radio_delete']);
+                      
+                  echo "<table>
+                  <tr>
+                      <th>voluntario</th>
+                      <th>participante</th>
+                      <th>fecha_inicio</th>
+                      <th>hora_inicio</th>
+                      <th>id_ambito</th>
+                      <th>id_poblacion</th>
+                      <th>name</th>                                 
+                      <th>id_estado</th>  
+                      <th>ELIMINAR</th>  
+                  </tr>";
+             
+                  echo crea_tabla_Actividades_html_del($_user_actividades );
+                  echo " </table>";     
+
+                }else{
+
+                 
+                    $arry_users=[];
+                    $_user_registro = new Usuario("");
+                    $_user_registro->id_estado=3;
+
+  //                   echo "SELECCIONADO A USUARIO O A VOLUNTARIOS<HR>";
+
+                  if($_POST['radio_delete']==12){//VOLUNTARIO
+                      $_user_registro->id_tipo=2; 
+
+                  }
+
+                  if($_POST['radio_delete']==13){//USUARIO
+                     $_user_registro->id_tipo=3; 
+
+                  }
+
+               /*   echo "<pre>";
+                  print_r(  $_user_registro);
+                  echo "</pre>";*/
+                  
+                  $arry_users = $_user_registro->get_all_user_by_tipo_and_by_estado();
+
+                  
+                  echo "<table>
+                  <tr>
+                      <th>alias</th>
+                      <th>tipo</th>
+                      <th>estado</th>
+                      <th>email</th>
+                      <th>disponiblidad</th>
+                      <th>sector</th>
+                      <th>name</th>
+                      <th>surname</th>
+                      <th>ELIMINAR</th>  
+                  </tr>";
+             
+                  echo crea_tabla_html_del($arry_users );
+                  echo " </table>";
+
+
+
+                }
+
+
+
+
+
+               }
+
+         
+         
+         ?>
+        
+
+                   
          </section>
 
 			<br><hr>

@@ -63,7 +63,7 @@
               <br><br>
                     <ul class="nav">
                       <li> <a href="../users_forms/form_editar.php"> Editar</a></li>
-                      <li> <a href="../users_forms/form_eliminar.php"> Eliminar</a></li>
+                      <li> <a href="../activities_forms/form_eliminar.php"> Eliminar</a></li>
                       <li> <a href="../sesiones/destroy_session.php"> Logout</a></li>
 
                       </ul>
@@ -153,20 +153,47 @@
 
                             if(isset($_POST['actividades'])){
 
-                                echo "<hr>MOSTRAR TABLA ACTIVIDADES<hr>"; 
+                                $_actividades=[];
+
+                            //    echo "<hr>MOSTRAR TABLA ACTIVIDADES<hr>"; 
+
                                 $_user_actividades = new Usuario("");
 
+                                $_actividades= $_user_actividades->get_all_activities(3);
+
                                 if(isset($_POST['act_abiertas'])){
+                                 // echo "Abiertas";
                                 
-                               //   $_user_actividades->id_estado=1;
+                                  $_actividades=$_user_actividades->get_all_activities(1);
 
                                 }
 
                                 if(isset($_POST['act_bajas'])){
+                               //   echo "cerradas";
                                  
-                                //  $_user_actividades->id_estado=2;
+                                  $_actividades=$_user_actividades->get_all_activities(0);
 
                                 }
+
+
+      
+                                echo "<table>
+                                <tr>
+                                    <th>voluntario</th>
+                                    <th>participante</th>
+                                    <th>fecha_inicio</th>
+                                    <th>hora_inicio</th>
+                                    <th>id_ambito</th>
+                                    <th>id_poblacion</th>
+                                    <th>name</th>                                 
+                                    <th>id_estado</th>  
+                                    <th>EDITAR</th>  
+                                </tr>";
+                           
+                                echo crea_tabla_Actividades_html($_actividades );
+                                echo " </table>";
+
+                                
                                 
 
                             }else{

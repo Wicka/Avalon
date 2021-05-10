@@ -26,7 +26,7 @@
                         <td>".$value['sector_estudios']."</td>
                         <td>".$value['name']."</td>
                         <td>".$value['surname_01']."</td>                       
-                        <td> <a href='../users_forms/form_editar.php?id=$value[alias]'> Editar </a> </td>
+                        <td> <a href='../users_forms/form_editar.php?alias=$value[alias]'> Editar </a> </td>
                   </tr>";
 
         
@@ -34,6 +34,94 @@
         }
           return $_lista;
       }
+
+      
+      
+      function crea_tabla_html_del($_array){
+        $_lista="";
+
+
+        foreach ($_array as $key => $value) {
+            $_lista = $_lista.
+                  "<tr>
+                        <td>".$value['alias']."</td>
+                        <td>".$value['id_tipo']."</td>
+                        <td>".$value['id_estado']."</td>
+                        <td>".$value['email']."</td>
+                        <td>".$value['id_disponibilidad']."</td>
+                        <td>".$value['sector_estudios']."</td>
+                        <td>".$value['name']."</td>
+                        <td>".$value['surname_01']."</td>                       
+                        <td> <a href='../crud_activities/eliminar.php?alias=$value[alias]'> Eliminar </a> </td>
+                  </tr>";
+
+        
+
+        }
+          return $_lista;
+      }
+
+
+
+
+      
+
+      function crea_tabla_Actividades_html($_array){
+         $_lista="";
+
+
+         foreach ($_array as $key => $value) {
+            $_lista = $_lista.
+                  "<tr>
+                        <td>".$value['id_voluntario']."</td>
+                        <td>".$value['num_participante']."</td>
+                        <td>".$value['fecha_inicio']."</td>
+                        <td>".$value['hora_inicio']."</td>
+                        <td>".$value['id_ambito']."</td>
+                        <td>".$value['id_poblacion']."</td>
+                        <td>".$value['name']."</td>
+                        <td>".$value['id_estado']."</td>       
+                        <td> <a href='../users_forms/form_editar.php?id=$value[id]'> Editar </a> </td>                
+                     
+                  </tr>";
+
+        
+
+        }
+          return $_lista;
+      }
+
+       
+
+      function crea_tabla_Actividades_html_del($_array){
+        $_lista="";
+
+
+        foreach ($_array as $key => $value) {
+           $_lista = $_lista.
+                 "<tr>
+                       <td>".$value['id_voluntario']."</td>
+                       <td>".$value['num_participante']."</td>
+                       <td>".$value['fecha_inicio']."</td>
+                       <td>".$value['hora_inicio']."</td>
+                       <td>".$value['id_ambito']."</td>
+                       <td>".$value['id_poblacion']."</td>
+                       <td>".$value['name']."</td>
+                       <td>".$value['id_estado']."</td>       
+                       <td> <a href='../crud_activities/eliminar.php?id=$value[id]'> Eliminar </a> </td>                
+                    
+                 </tr>";
+
+       
+
+       }
+         return $_lista;
+     }
+
+
+
+
+
 
       function crea_lista_actividades($_actividades){
 
