@@ -4,14 +4,14 @@
     if (isset( $_SESSION['alias_user'])){
 
         if(session_destroy() == true){
-          echo "No has iniciat sesio";
+      //    echo "No has iniciat sesio";
           header("Location: ../index.php");
           die();
         }
 
       }else{
         session_destroy();
-        echo "Sesion cerrada<hr>";
+   //     echo "Sesion cerrada<hr>";
         header("Location: ../index.php");
         die();
       }

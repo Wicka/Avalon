@@ -373,15 +373,15 @@
 
                 
           function verifica_Pwd($_pwd){
-                echo "pwd que paso ". $_pwd."<hr>";
-                echo "pwd que tiene objeto ". $this->pwd."<hr>";
+         //       echo "pwd que paso ". $_pwd."<hr>";
+         //       echo "pwd que tiene objeto ". $this->pwd."<hr>";
                 $_pwd_hash = trim($this->pwd);
                 if (password_verify ($_pwd, $_pwd_hash)) {
-                  echo "ok <hr>";
+          //        echo "ok <hr>";
                   $login = true;
                 } else {
                   $login = false;
-                  echo "error <hr>";
+           //       echo "error <hr>";
                 }
               return $login;
           }

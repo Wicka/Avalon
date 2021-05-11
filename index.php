@@ -1,29 +1,19 @@
 <?php
-		session_start();
+		session_start();		
+		
 		if(isset($_SESSION['alias_user'])){
-
-			echo "user : ".$_SESSION['alias_user'];
-			echo "tipo : ".$_SESSION['tipo_user'];
-	//		echo "HOLA";
-			
-			if($_SESSION['tipo_user']==1){
-				header("Location: vistas/perfil_admin.php");
-	//			echo "1";
-			}
-			
-			if($_SESSION['tipo_user']==2){
-				header("Location: vistas/perfil_voluntario.php");
-	//			echo "2";
-			}
-
-			if($_SESSION['tipo_user']==3){
-				header("Location: vistas/perfil_usuario.php");
-		//		echo "3";
-			}
-		//	echo "000";
-
-		}
 	
+			if($_SESSION['tipo_user']==1){
+				header("Location: https://avalon-help.000webhostapp.com/vistas/perfil_Admin.php");
+			
+			}else if($_SESSION['tipo_user']==2){
+				header("Location: https://avalon-help.000webhostapp.com/vistas/perfil_Voluntario.php");
+			
+			}else if($_SESSION['tipo_user']==3){
+				header("Location: https://avalon-help.000webhostapp.com/vistas/perfil_Usuario.php");				
+			}				
+		}	
+		
  ?>
 
 <doctype html>
